@@ -5,11 +5,34 @@ import { FormEvent, useEffect, useMemo, useState } from "react";
 
 function getApiUrl(): string {
   if (typeof window !== "undefined") {
+    const isLocal =
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1" ||
+      window.location.hostname === "";
+
     const saved = window.localStorage.getItem("football_api_url");
-    if (saved && saved.trim()) return saved.trim().replace(/\/+$/, "");
+    if (saved && saved.trim()) {
+      const clean = saved.trim().replace(/\/+$/, "");
+      if (isLocal && clean.includes("api_proxy.php")) {
+        window.localStorage.removeItem("football_api_url");
+      } else {
+        return clean;
+      }
+    }
+
     const winConf = (window as any).__APP_CONFIG__ || (window as any).APP_CONFIG;
-    if (winConf?.API_URL && winConf.API_URL.trim()) return winConf.API_URL.trim().replace(/\/+$/, "");
+    if (winConf?.API_URL && winConf.API_URL.trim()) {
+      const confUrl = winConf.API_URL.trim().replace(/\/+$/, "");
+      if (!isLocal || !confUrl.includes("api_proxy.php")) {
+        return confUrl;
+      }
+    }
+
+    if (isLocal) {
+      return "http://localhost:3000/api/v1";
+    }
   }
+
   return (
     process.env.NEXT_PUBLIC_API_BASE_URL ??
     process.env.NEXT_PUBLIC_API_URL ??
@@ -1839,6 +1862,16 @@ export default function Home() {
   const [apiChecking, setApiChecking] = useState(false);
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      const isLocal =
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1" ||
+        window.location.hostname === "";
+      const saved = window.localStorage.getItem("football_api_url");
+      if (isLocal && saved && saved.includes("api_proxy.php")) {
+        window.localStorage.removeItem("football_api_url");
+      }
+    }
     const currentApi = typeof window !== "undefined"
       ? (window.localStorage.getItem("football_api_url") || API)
       : API;
@@ -2164,17 +2197,32 @@ export default function Home() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: emailOrPhone, password }),
         });
-        const data = await res.json();
-        if (res.ok) {
+        const text = await res.text();
+        let data: any = null;
+        try {
+          data = JSON.parse(text);
+        } catch {
+          data = null;
+        }
+
+        if (res.ok && data?.user) {
           loggedUser = {
             ...data.user,
             accessToken: data.accessToken,
           };
-        } else if (res.status === 401 || res.status === 400) {
+        } else if (data && (res.status === 401 || res.status === 400)) {
           throw new Error(data.message ?? "Tài khoản hoặc mật khẩu không chính xác");
+        } else {
+          throw new Error("FALLBACK_TO_NEON");
         }
       } catch (backendErr: any) {
-        if (backendErr.message && !backendErr.message.includes("Failed to fetch") && !backendErr.message.includes("NetworkError")) {
+        if (
+          backendErr.message &&
+          backendErr.message !== "FALLBACK_TO_NEON" &&
+          !backendErr.message.includes("Failed to fetch") &&
+          !backendErr.message.includes("NetworkError") &&
+          !backendErr.message.includes("Unexpected token")
+        ) {
           throw backendErr;
         }
         // Fallback: kết nối trực tiếp cơ sở dữ liệu Neon Cloud
@@ -2217,7 +2265,7 @@ export default function Home() {
       }, 700);
     } catch (err: any) {
       const msg = err.message || "";
-      if (msg.includes("Failed to fetch")) {
+      if (msg.includes("Failed to fetch") || msg.includes("Unexpected token")) {
         setAuthError("Không thể kết nối đến máy chủ Backend (Port 3000). Vui lòng khởi động Backend!");
       } else {
         setAuthError(msg || "Tài khoản hoặc mật khẩu không chính xác.");
@@ -2247,17 +2295,32 @@ export default function Home() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ fullName, phone, email: email || undefined, password }),
         });
-        const data = await res.json();
-        if (res.ok) {
+        const text = await res.text();
+        let data: any = null;
+        try {
+          data = JSON.parse(text);
+        } catch {
+          data = null;
+        }
+
+        if (res.ok && data?.user) {
           newUser = {
             ...data.user,
             accessToken: data.accessToken,
           };
-        } else if (res.status === 409 || res.status === 400) {
+        } else if (data && (res.status === 409 || res.status === 400)) {
           throw new Error(data.message ?? "Đăng ký không thành công");
+        } else {
+          throw new Error("FALLBACK_TO_NEON");
         }
       } catch (backendErr: any) {
-        if (backendErr.message && !backendErr.message.includes("Failed to fetch") && !backendErr.message.includes("NetworkError")) {
+        if (
+          backendErr.message &&
+          backendErr.message !== "FALLBACK_TO_NEON" &&
+          !backendErr.message.includes("Failed to fetch") &&
+          !backendErr.message.includes("NetworkError") &&
+          !backendErr.message.includes("Unexpected token")
+        ) {
           throw backendErr;
         }
         // Fallback: Tự động lưu thẳng vào Neon Cloud Database nếu Backend offline
@@ -2299,7 +2362,7 @@ export default function Home() {
       }, 800);
     } catch (err: any) {
       const msg = err.message || "";
-      if (msg.includes("Failed to fetch")) {
+      if (msg.includes("Failed to fetch") || msg.includes("Unexpected token")) {
         setAuthError("Không thể kết nối đến máy chủ Backend (Port 3000). Vui lòng khởi động Backend!");
       } else {
         setAuthError(msg || "Đăng ký không thành công.");
@@ -4691,8 +4754,8 @@ export default function Home() {
                 👨‍💻 Hồ sơ Năng Lực (CV) Lê Duy Tài ↗
               </Link>
               <a href="/admin" style={{ color: "#34d399", fontWeight: "600" }}>⚙️ Cổng Quản Trị Viên / Staff</a>
-              <a href={`${API.replace(/\/api\/v1$/, "")}/`} target="_blank" style={{ color: "#cbd5e1" }}>📖 Swagger REST API Docs ↗</a>
-              <a href={`${API.replace(/\/api\/v1$/, "")}/openapi.json`} target="_blank" style={{ color: "#cbd5e1" }}>📄 OpenAPI JSON Specification ↗</a>
+              <a href={API.startsWith("http") ? `${API.replace(/\/api\/v1$/, "")}/` : "http://localhost:3000/"} target="_blank" style={{ color: "#cbd5e1" }}>📖 Swagger REST API Docs ↗</a>
+              <a href={API.startsWith("http") ? `${API.replace(/\/api\/v1$/, "")}/openapi.json` : "http://localhost:3000/openapi.json"} target="_blank" style={{ color: "#cbd5e1" }}>📄 OpenAPI JSON Specification ↗</a>
             </div>
           </div>
         </div>

@@ -4,10 +4,25 @@ import { FormEvent, useEffect, useState } from "react";
 
 function getApiUrl(): string {
   if (typeof window !== "undefined") {
+    const isLocal =
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1" ||
+      window.location.hostname === "";
     const saved = window.localStorage.getItem("football_api_url");
-    if (saved && saved.trim()) return saved.trim().replace(/\/+$/, "");
+    if (saved && saved.trim()) {
+      const clean = saved.trim().replace(/\/+$/, "");
+      if (isLocal && clean.includes("api_proxy.php")) {
+        window.localStorage.removeItem("football_api_url");
+      } else {
+        return clean;
+      }
+    }
     const winConf = (window as any).__APP_CONFIG__ || (window as any).APP_CONFIG;
-    if (winConf?.API_URL && winConf.API_URL.trim()) return winConf.API_URL.trim().replace(/\/+$/, "");
+    if (winConf?.API_URL && winConf.API_URL.trim()) {
+      const confUrl = winConf.API_URL.trim().replace(/\/+$/, "");
+      if (!isLocal || !confUrl.includes("api_proxy.php")) return confUrl;
+    }
+    if (isLocal) return "http://localhost:3000/api/v1";
   }
   return (
     process.env.NEXT_PUBLIC_API_BASE_URL ??
