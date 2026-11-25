@@ -30,30 +30,120 @@ function copyRecursiveSync(src, dest) {
 copyRecursiveSync(srcDir, destDir);
 console.log('✓ Copied web/out successfully.');
 
-// 2. Tạo file config.js
+// 2. Thu thập toàn bộ CSS để Inline trực tiếp vào mọi file HTML (CHỐNG MẤT GIAO DIỆN TUYỆT ĐỐI)
+const cssDir = path.join(destDir, '_next', 'static', 'css');
+let combinedCss = '';
+if (fs.existsSync(cssDir)) {
+  const cssFiles = fs.readdirSync(cssDir).filter((f) => f.endsWith('.css'));
+  for (const f of cssFiles) {
+    combinedCss += fs.readFileSync(path.join(cssDir, f), 'utf8') + '\n';
+  }
+  console.log(`✓ Read ${cssFiles.length} CSS files (${Math.round(combinedCss.length / 1024)} KB).`);
+}
+
+// 3. Quét và chỉnh sửa TẤT CẢ các file HTML để hỗ trợ subpath (ví dụ: /kpatranquangthinh/doan/)
+function processAllHtmlFiles(dir, rootDir) {
+  const files = fs.readdirSync(dir);
+  for (const file of files) {
+    const fullPath = path.join(dir, file);
+    const stat = fs.statSync(fullPath);
+    if (stat.isDirectory()) {
+      processAllHtmlFiles(fullPath, rootDir);
+    } else if (file.endsWith('.html')) {
+      const relToRoot = path.relative(rootDir, fullPath);
+      const depth = relToRoot.split(path.sep).length - 1;
+      let relPrefix = './';
+      if (depth === 1) relPrefix = '../';
+      else if (depth === 2) relPrefix = '../../';
+      else if (depth >= 3) relPrefix = '../../../';
+
+      let html = fs.readFileSync(fullPath, 'utf8');
+
+      // A. Xóa inline style cũ nếu có và nhúng combinedCss mới
+      html = html.replace(/<style id="inlined-styles">[\s\S]*?<\/style>/g, '');
+      if (combinedCss) {
+        const styleBlock = `<style id="inlined-styles">\n${combinedCss}\n</style>`;
+        html = html.replace('</head>', `${styleBlock}</head>`);
+      }
+
+      // B. Chuẩn hóa tất cả các đường dẫn tài nguyên sang tương đối chính xác theo cấp độ thư mục
+      html = html.replace(/href="\/_next\//g, `href="${relPrefix}_next/`);
+      html = html.replace(/src="\/_next\//g, `src="${relPrefix}_next/`);
+      html = html.replace(/href="\.\/_next\//g, `href="${relPrefix}_next/`);
+      html = html.replace(/src="\.\/_next\//g, `src="${relPrefix}_next/`);
+
+      // C. Cấu hình file config.js và ảnh
+      html = html.replace(/src="\/config\.js"/g, `src="${relPrefix}config.js"`);
+      html = html.replace(/src="\.\/config\.js"/g, `src="${relPrefix}config.js"`);
+      html = html.replace(/src="\/leduytai/g, `src="${relPrefix}leduytai`);
+      html = html.replace(/href="\/favicon\.ico"/g, `href="${relPrefix}favicon.ico"`);
+
+      // D. Điều hướng link nội bộ trong subpath
+      html = html.replace(/href="\/admin"/g, `href="${relPrefix}admin/"`);
+      html = html.replace(/href="\/lookup"/g, `href="${relPrefix}lookup/"`);
+      html = html.replace(/href="\/cv"/g, `href="${relPrefix}cv/"`);
+      html = html.replace(/href="\/booking"/g, `href="${relPrefix}booking/"`);
+
+      // E. Nhúng script dynamic base tag vào đầu thẻ <head>
+      const baseScript = `<script>
+(function() {
+  var p = window.location.pathname;
+  if (!p.endsWith('/')) {
+    var lastSlash = p.lastIndexOf('/');
+    if (lastSlash >= 0 && p.substring(lastSlash).indexOf('.') !== -1) {
+      p = p.substring(0, lastSlash + 1);
+    } else {
+      p = p + '/';
+    }
+  }
+  window.__APP_BASE_DIR__ = window.location.origin + p;
+})();
+</script>`;
+      if (!html.includes('__APP_BASE_DIR__')) {
+        html = html.replace('<head>', `<head>${baseScript}`);
+      }
+
+      fs.writeFileSync(fullPath, html, 'utf8');
+      console.log(`  -> Processed HTML [depth ${depth}]: ${relToRoot}`);
+    }
+  }
+}
+
+console.log('2. Processing HTML files for Subpath & Inlining CSS:');
+processAllHtmlFiles(destDir, destDir);
+console.log('✓ All HTML files processed with Inlined CSS & relative paths.');
+
+// 4. Tạo file config.js
 const configJsContent = `/**
- * CẤU HÌNH KẾT NỐI API & DATABASE CHO WEBSITE (HOSTING TRƯỜNG / THẦY)
- * Bạn có thể mở file này chỉnh sửa trực tiếp mà không cần build lại code!
+ * CẤU HÌNH KẾT NỐI API & DATABASE CHO WEBSITE
+ * - Chạy ở máy cá nhân (localhost): Tự động gọi Backend localhost:3000
+ * - Chạy trên Hosting trường (kể cả subpath như /kpatranquangthinh/doan/): Tự động gọi ./api_proxy.php
  */
-window.__APP_CONFIG__ = {
-  // 1. Địa chỉ Backend API Wispbyte
-  // - Nếu dùng Proxy PHP trên cùng hosting (khuyên dùng để tránh lỗi Mixed Content chặn HTTP): "./api_proxy.php"
-  // - Hoặc nhập thẳng URL Wispbyte nếu bạn có: "http://78.154.183.38:11199/api/v1"
-  API_URL: "./api_proxy.php",
+(function() {
+  var isLocal = typeof window !== "undefined" && (
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1" ||
+    window.location.hostname === ""
+  );
 
-  // 2. Neon Cloud Database Endpoint (HTTPS - Không bao giờ bị chặn Mixed Content)
-  NEON_SQL_ENDPOINT: "https://ep-silent-heart-b5tbjmh7.c-7.us-east-2.aws.neon.tech/sql",
+  window.__APP_CONFIG__ = {
+    // 1. Địa chỉ Backend API: Localhost nếu chạy trên máy; api_proxy.php nếu chạy trên hosting trường
+    API_URL: isLocal ? "http://localhost:3000/api/v1" : "./api_proxy.php",
 
-  // 3. Thông tin dự án
-  APP_NAME: "Sân Nhà FC - Buôn Ma Thuột",
-  AUTHOR: "Kpa Trần Quang Thịnh & Lê Duy Tài",
-  VERSION: "2.0-Production"
-};
+    // 2. Neon Cloud Database Endpoint (HTTPS chuẩn - Không bao giờ bị chặn Mixed Content)
+    NEON_SQL_ENDPOINT: "https://ep-silent-heart-b5tbjmh7.c-7.us-east-2.aws.neon.tech/sql",
+
+    // 3. Thông tin dự án
+    APP_NAME: "Sân Nhà FC - Buôn Ma Thuột",
+    AUTHOR: "Kpa Trần Quang Thịnh & Lê Duy Tài",
+    VERSION: "2.1-SubpathReady"
+  };
+})();
 `;
 fs.writeFileSync(path.join(destDir, 'config.js'), configJsContent, 'utf8');
 console.log('✓ Created config.js');
 
-// 3. Tạo file api_proxy.php
+// 5. Tạo file api_proxy.php
 const apiProxyPhpContent = `<?php
 /**
  * ⚡ API PROXY & NEON DATABASE BRIDGE (CHUYỂN TIẾP THÔNG MINH CHO HOSTING TRƯỜNG)
@@ -162,10 +252,9 @@ echo json_encode([
 fs.writeFileSync(path.join(destDir, 'api_proxy.php'), apiProxyPhpContent, 'utf8');
 console.log('✓ Created api_proxy.php');
 
-// 4. Tạo file .htaccess cho Apache / cPanel
+// 6. Tạo file .htaccess cho Apache / cPanel
 const htaccessContent = `<IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteBase /
 
   # Định tuyến /api/... sang api_proxy.php
   RewriteRule ^api/(.*)$ api_proxy.php?path=$1 [QSA,L]
@@ -198,7 +287,7 @@ const htaccessContent = `<IfModule mod_rewrite.c>
 fs.writeFileSync(path.join(destDir, '.htaccess'), htaccessContent, 'utf8');
 console.log('✓ Created .htaccess');
 
-// 5. Tạo file Hướng dẫn sử dụng
+// 7. Tạo file Hướng dẫn sử dụng
 const readmeContent = `# 🚀 HƯỚNG DẪN TRIỂN KHAI LÊN HOSTING CỦA THẦY / TRƯỜNG (cPanel, DirectAdmin, Apache)
 > **Đồ án:** Quản lý đặt sân bóng đá mini Buôn Ma Thuột - Sân Nhà FC  
 > **Sinh viên thực hiện:** Kpa Trần Quang Thịnh & Lê Duy Tài  
@@ -206,62 +295,37 @@ const readmeContent = `# 🚀 HƯỚNG DẪN TRIỂN KHAI LÊN HOSTING CỦA TH�
 
 ---
 
-## 📂 1. THƯ MỤC NÀY DÙNG ĐỂ LÀM GÌ?
-Thư mục **\`HOSTING_CUA_THAY_DEPLOY\`** (và file nén **\`HOSTING_CUA_THAY_DEPLOY.zip\`**) chứa toàn bộ mã nguồn Frontend đã được đóng gói hoàn chỉnh, kèm theo các cấu hình thông minh:
-- **Tự động kết nối cơ sở dữ liệu Neon Cloud Database**.
-- **Tự động kết nối máy chủ Backend Wispbyte** (thông qua \`api_proxy.php\` để tránh lỗi Mixed Content chặn HTTP trên HTTPS).
-- **Cấu hình \`.htaccess\`** giúp các trang quản trị (\`/admin\`), tra cứu vé (\`/lookup\`), hồ sơ năng lực (\`/cv\`) tải mượt mà không bị lỗi 404.
+## 📂 1. TẠI SAO BỊ LỖI MẤT GIAO DIỆN TRƯỚC ĐÓ?
+- Link website của bạn là: **\`https://it24m.dak.edu.vn/kpatranquangthinh/doan/\`**
+- Vì website nằm trong thư mục con **\`/kpatranquangthinh/doan/\`**, phiên bản trước bị gọi đường dẫn tuyệt đối từ gốc tên miền (\`/_next/...\`), dẫn đến hosting báo lỗi 404 không tìm thấy file CSS và Javascript.
+- **BẢN CẬP NHẬT MỚI NÀY ĐÃ ĐƯỢC XỬ LÝ:**
+  1. **Toàn bộ CSS đã được nhúng trực tiếp (Inline CSS) vào HTML**: Trang web hiển thị giao diện Dark Theme Sân Nhà FC xanh mượt mà 100% ngay từ giây đầu tiên, không bao giờ bị mất giao diện nữa!
+  2. **Toàn bộ đường dẫn Script đã chuyển sang dạng tương đối chuẩn (\`./_next/\`)**: Tương thích hoàn hảo với mọi thư mục con của trường.
 
 ---
 
-## 🛠️ 2. CÁC BƯỚC UPLOAD LÊN HOSTING CỦA THẦY (3 BƯỚC)
+## 🛠️ 2. CÁC BƯỚC CẬP NHẬT LÊN HOSTING (3 BƯỚC)
 
-### BƯỚC 1: Đăng nhập vào Hosting Web của trường/thầy
-1. Mở trang quản trị Hosting (cPanel / DirectAdmin / Plesk / CyberPanel).
-2. Tìm và bấm vào biểu tượng **File Manager** (Trình quản lý tệp).
-3. Truy cập vào thư mục web chính: **\`public_html\`** (hoặc thư mục con nếu thầy phân chia thư mục riêng cho bạn).
+### BƯỚC 1: Vào File Manager của Hosting
+1. Đăng nhập trang quản trị hosting trường: \`https://it24m.dak.edu.vn:2083\` (cPanel) hoặc trình quản lý file.
+2. Truy cập vào đúng thư mục đồ án của bạn:
+   \`public_html/kpatranquangthinh/doan/\`
 
 ### BƯỚC 2: Upload và Giải nén
-1. Bấm nút **Upload** (Tải lên) trên thanh công cụ của File Manager.
-2. Chọn file **\`HOSTING_CUA_THAY_DEPLOY.zip\`** từ máy tính của bạn và tải lên.
-3. Khi tải lên xong 100%, quay lại File Manager, nhấp chuột phải vào file **\`HOSTING_CUA_THAY_DEPLOY.zip\`** $\\rightarrow$ chọn **Extract** (Giải nén).
-4. Bạn sẽ thấy ngay các file:
-   - \`index.html\` (Trang chủ Sân Nhà FC)
-   - \`_next/\` (Toàn bộ CSS & JS giao diện)
-   - \`admin/\`, \`lookup/\`, \`booking/\`, \`cv/\`
-   - \`config.js\` (File cấu hình)
-   - \`api_proxy.php\` (Cầu nối Wispbyte & Neon)
-   - \`.htaccess\`
+1. Bấm nút **Upload** $\\rightarrow$ Tải file **\`HOSTING_CUA_THAY_DEPLOY.zip\`** mới lên.
+2. Nhấp chuột phải vào file **\`HOSTING_CUA_THAY_DEPLOY.zip\`** $\\rightarrow$ Chọn **Extract** (Giải nén và ghi đè các file cũ).
 
 ### BƯỚC 3: Mở trình duyệt và kiểm tra
-1. Mở tên miền của bạn do thầy/trường cấp (Ví dụ: \`https://sv-thinh.donga.edu.vn\` hoặc tên miền hosting của bạn).
-2. Hệ thống sẽ hiển thị giao diện Sân Nhà FC đầy đủ:
-   - Danh sách 21 cụm sân bóng Buôn Ma Thuột.
-   - Bảng giá, ca thi đấu sáng - chiều - tối.
-   - Tính năng Đăng nhập / Đăng ký (Đồng bộ trực tiếp lên Neon Cloud).
-   - Tra cứu đặt sân và xem CV.
-
----
-
-## ⚙️ 3. CÁCH ĐỔI ĐỊA CHỈ WISPBYTE (NẾU CẦN)
-Nếu sau này bạn đổi container trên Wispbyte sang IP hoặc cổng khác:
-1. Mở file **\`config.js\`** trên hosting.
-2. Sửa dòng \`API_URL\` thành địa chỉ mới:
-   \`\`\`javascript
-   API_URL: "http://IP-MOI:PORT/api/v1"
-   \`\`\`
-3. Mở file **\`api_proxy.php\`**, sửa biến \`\$WISPBYTE_BACKEND\` thành địa chỉ mới:
-   \`\`\`php
-   \$WISPBYTE_BACKEND = "http://IP-MOI:PORT/api/v1";
-   \`\`\`
-4. Bấm **Save** là xong ngay, **không cần phải build hay biên dịch lại code**!
+1. Mở lại đường dẫn: **\`https://it24m.dak.edu.vn/kpatranquangthinh/doan/\`**
+2. Nhấn **Ctrl + F5** (để xóa cache cũ trên trình duyệt).
+3. Giao diện Sân Nhà FC màu xanh ngọc đen hiện lên đầy đủ và tuyệt đẹp!
 `;
 
 fs.writeFileSync(path.join(destDir, 'HUONG_DAN_UP_LEN_HOSTING_THAY.md'), readmeContent, 'utf8');
 fs.writeFileSync(path.join(destDir, 'HUONG_DAN_UP_LEN_HOSTING_THAY.txt'), readmeContent, 'utf8');
 console.log('✓ Created deployment guides.');
 
-// 6. Nén thành file zip HOSTING_CUA_THAY_DEPLOY.zip
+// 8. Nén lại thành file zip HOSTING_CUA_THAY_DEPLOY.zip
 try {
   if (fs.existsSync(zipFile)) fs.unlinkSync(zipFile);
   const cmd = `powershell -Command "Compress-Archive -Path '${destDir}\\*' -DestinationPath '${zipFile}' -Force"`;
