@@ -2221,87 +2221,51 @@ export default function Home() {
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", background: "var(--bg)", color: "var(--text-main)" }}>
       {/* Sleek Dark Night Topbar */}
-      <div style={{ background: "#050a12", borderBottom: "1px solid rgba(50, 157, 210, 0.2)", padding: "7px 24px", fontSize: "12px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <span style={{ color: "#329dd2", fontWeight: 700, display: "flex", alignItems: "center", gap: "6px" }}>
-          <span>⚽</span> <span>HỆ THỐNG SÂN BÓNG BUÔN MA THUỘT · SÂN NHÀ FC · SÀN CÁP KÈO & LEO RANK ELO</span>
-        </span>
-        <span style={{ color: "#94a3b8" }}>📞 Hotline hỗ trợ: <strong style={{ color: "#f59e0b" }}>0896890399</strong> · Mở cửa 06:00 - 23:00</span>
+      <div className="top-announcement-bar">
+        <div className="top-announcement-inner">
+          <span className="top-announcement-left">
+            <span>⚽</span>
+            <span>HỆ THỐNG SÂN BÓNG BUÔN MA THUỘT · SÂN NHÀ FC · CÁP KÈO &amp; LEO RANK ELO</span>
+          </span>
+          <span className="top-announcement-right">
+            <span>📞 Hotline hỗ trợ: <strong style={{ color: "#f59e0b" }}>0896890399</strong></span>
+            <span className="top-announcement-sep">·</span>
+            <span>⏰ Mở cửa 06:00 - 23:00</span>
+          </span>
+        </div>
       </div>
 
-      {/* Main Navigation Topbar Chuẩn ALO Booking */}
+      {/* Main Navigation Topbar Chuẩn Sân Nhà FC */}
       <header className="topbar-wrapper">
         <div className="topbar">
-          <a className="brand" href="/" style={{ display: "flex", alignItems: "center", gap: "10px", textDecoration: "none" }}>
-            <div className="brand-icon" style={{ width: "42px", height: "42px", borderRadius: "12px", background: "linear-gradient(135deg, #329dd2 0%, #1f7fae 100%)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "22px", boxShadow: "0 4px 14px rgba(50, 157, 210, 0.4)" }}>⚽</div>
-            <div>
+          <a className="brand" href="/" style={{ display: "flex", alignItems: "center", gap: "10px", textDecoration: "none", flexShrink: 0 }}>
+            <div className="brand-icon" style={{ width: "38px", height: "38px", borderRadius: "10px", background: "linear-gradient(135deg, #10b981 0%, #059669 100%)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "20px", boxShadow: "0 4px 14px rgba(16, 185, 129, 0.4)", flexShrink: 0 }}>⚽</div>
+            <div style={{ display: "flex", flexDirection: "column", whiteSpace: "nowrap" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                <span style={{ color: "#ffffff", fontSize: "20px", fontWeight: 900, letterSpacing: "-0.5px" }}>SÂN NHÀ <span style={{ color: "#329dd2" }}>FC</span></span>
-            <span className="alo-brand-badge" style={{ background: "linear-gradient(135deg, #eb2f33 0%, #b91c1c 100%)" }}>BMT</span>
+                <span style={{ color: "#ffffff", fontSize: "18px", fontWeight: 900, letterSpacing: "-0.5px", whiteSpace: "nowrap" }}>SÂN NHÀ <span style={{ color: "#10b981" }}>FC</span></span>
+                <span className="alo-brand-badge" style={{ background: "linear-gradient(135deg, #eb2f33 0%, #b91c1c 100%)", padding: "2px 6px", fontSize: "9px" }}>BMT</span>
               </div>
-              <div style={{ fontSize: "10px", color: "#94a3b8", fontWeight: 700, letterSpacing: "0.5px" }}>ĐẶT LỊCH THỂ THAO TRỰC TUYẾN</div>
+              <div style={{ fontSize: "10px", color: "#94a3b8", fontWeight: 700, letterSpacing: "0.5px", whiteSpace: "nowrap" }}>ĐẶT SÂN BÓNG BMT</div>
             </div>
           </a>
 
           {/* ALO Location Pill */}
           <div className="alo-location-pill" title="Khu vực hoạt động mặc định">
             <span>📍</span>
-            <span>TP. Buôn Ma Thuột, Đắk Lắk</span>
+            <span>BMT, Đắk Lắk</span>
           </div>
 
           <nav className="nav-links">
-            <div className="nav-group-pill">
-              <a href="#dat-san" title="Xem sơ đồ ma trận ca trống và đặt lịch">📅 Đặt sân trực tuyến</a>
-              <a href="#danh-sach-san" title="Danh mục 21 cụm sân Buôn Ma Thuột">🏟️ 21 Cụm sân</a>
-              <a href="#ban-do-san" title="Định vị GPS & bản đồ cụm sân">🗺️ Radar GPS</a>
-            </div>
-            <div className="nav-group-pill">
-              <a href="#cap-keo" title="Sàn cáp kèo giao lưu phủi">🤝 Cáp kèo</a>
-              <a href="#hoi-nhom" title="Câu lạc bộ 15 người & leo rank">🛡️ FC &amp; Leo rank</a>
-              <a href="#quy-trinh-alo" title="6 Bước đặt lịch chuẩn Sân Nhà FC">📋 Quy trình</a>
-            </div>
-            <div className="nav-group-pill">
-              <a href="#bang-gia" title="Bảng giá chuẩn các loại sân">💰 Bảng giá</a>
-              <a href="/lookup" title="Tra cứu mã phiếu đặt sân">🎫 Tra cứu vé</a>
-              <Link href="/cv" title="Hồ sơ năng lực & CV sinh viên Lê Duy Tài (Trang con bên trong)" style={{ color: "#38bdf8", fontWeight: "700" }}>👨‍💻 Hồ sơ CV</Link>
-            </div>
+            <a href="#dat-san" title="Xem sơ đồ ma trận ca trống và đặt lịch">📅 Đặt sân</a>
+            <a href="#danh-sach-san" title="Danh mục 21 cụm sân Buôn Ma Thuột">🏟️ 21 Cụm sân</a>
+            <a href="#ban-do-san" title="Định vị GPS & bản đồ cụm sân">🗺️ Radar GPS</a>
+            <a href="#cap-keo" title="Sàn cáp kèo giao lưu phủi">🤝 Cáp kèo FC</a>
+            <a href="#bang-gia" title="Bảng giá chuẩn các loại sân">💰 Bảng giá</a>
+            <a href="/lookup" title="Tra cứu mã phiếu đặt sân">🎫 Tra cứu vé</a>
+            <Link href="/cv" title="Hồ sơ năng lực & CV sinh viên Lê Duy Tài (Trang con bên trong)" style={{ color: "#34d399", fontWeight: "700" }}>👨‍💻 CV</Link>
           </nav>
 
-          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            {/* Nút Viên Thuốc Trạng Thái Kết Nối API Wispbyte & Neon */}
-            <button
-              type="button"
-              onClick={() => {
-                setApiCheckMsg("");
-                setApiConfigOpen(true);
-              }}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "7px",
-                padding: "6px 14px",
-                borderRadius: "999px",
-                border: isApiConnected ? "1px solid rgba(34, 197, 94, 0.4)" : "1px solid rgba(239, 68, 68, 0.4)",
-                background: isApiConnected ? "rgba(34, 197, 94, 0.12)" : "rgba(239, 68, 68, 0.12)",
-                color: isApiConnected ? "#4ade80" : "#f87171",
-                fontSize: "12px",
-                fontWeight: "700",
-                cursor: "pointer",
-                transition: "all 0.2s ease",
-              }}
-              title="Nhấn để kiểm tra hoặc đổi địa chỉ API Wispbyte / Neon"
-            >
-              <span
-                style={{
-                  width: "8px",
-                  height: "8px",
-                  borderRadius: "50%",
-                  backgroundColor: isApiConnected ? "#22c55e" : "#ef4444",
-                  boxShadow: isApiConnected ? "0 0 8px #22c55e" : "0 0 8px #ef4444",
-                  display: "inline-block",
-                }}
-              />
-              <span>{isApiConnected ? "Neon Cloud 🟢" : "Chưa kết nối API"}</span>
-            </button>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px", flexShrink: 0 }}>
             {currentUser ? (
               <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                 <button
@@ -2309,8 +2273,8 @@ export default function Home() {
                   className="user-badge-topbar"
                   style={{
                     cursor: "pointer",
-                    background: "rgba(50, 157, 210, 0.12)",
-                    border: "1px solid rgba(50, 157, 210, 0.3)",
+                    background: "rgba(16, 185, 129, 0.12)",
+                    border: "1px solid rgba(16, 185, 129, 0.3)",
                     borderRadius: "999px",
                     padding: "6px 14px",
                     display: "inline-flex",
@@ -2322,7 +2286,7 @@ export default function Home() {
                 >
                   <span>👤</span>
                   <span style={{ fontWeight: 700, color: "#f1f5f9" }}>{currentUser.fullName}</span>
-                  <span style={{ fontSize: "10px", background: "#329dd2", color: "#fff", padding: "2px 8px", borderRadius: "999px", fontWeight: 800 }}>
+                  <span style={{ fontSize: "10px", background: "#10b981", color: "#fff", padding: "2px 8px", borderRadius: "999px", fontWeight: 800 }}>
                     {currentUser.role === "ADMIN" ? "👑 ADMIN" : currentUser.role === "STAFF" ? "📋 STAFF" : "⚽ CẦU THỦ"}
                   </span>
                 </button>
@@ -2339,7 +2303,7 @@ export default function Home() {
               <button
                 type="button"
                 className="primary-button"
-                style={{ padding: "8px 16px", fontSize: "13px" }}
+                style={{ padding: "8px 16px", fontSize: "13px", whiteSpace: "nowrap" }}
                 onClick={() => {
                   setAuthError("");
                   setAuthNotice("");
@@ -2360,8 +2324,8 @@ export default function Home() {
           <button
             type="button"
             className="mobile-menu-btn"
-            style={{ display: "none", background: "none", border: "none", fontSize: "24px" }}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
           >
             ☰
           </button>
@@ -2390,13 +2354,13 @@ export default function Home() {
                 👤 Đăng nhập / Đăng ký tài khoản
               </button>
             )}
-            <a href="#dat-san" onClick={() => setMobileMenuOpen(false)} style={{ color: "#38bdf8" }}>📅 Đặt sân trực tuyến</a>
+            <a href="#dat-san" onClick={() => setMobileMenuOpen(false)} style={{ color: "#34d399" }}>📅 Đặt sân trực tuyến</a>
             <a href="#danh-sach-san" onClick={() => setMobileMenuOpen(false)}>🏟️ Danh sách sân</a>
             <a href="#cap-keo" onClick={() => setMobileMenuOpen(false)}>🤝 Sàn cáp kèo</a>
             <a href="#hoi-nhom" onClick={() => setMobileMenuOpen(false)}>🛡️ FC &amp; Leo rank ELO</a>
             <a href="#bang-gia" onClick={() => setMobileMenuOpen(false)}>💰 Bảng giá</a>
             <a href="/lookup" onClick={() => setMobileMenuOpen(false)}>🔍 Tra cứu vé đặt sân</a>
-            <Link href="/cv" onClick={() => setMobileMenuOpen(false)} style={{ color: "#38bdf8", fontWeight: "700" }}>👨‍💻 Hồ sơ CV &amp; Bài tập 1 ↗</Link>
+            <Link href="/cv" onClick={() => setMobileMenuOpen(false)} style={{ color: "#34d399", fontWeight: "700" }}>👨‍💻 Hồ sơ CV &amp; Bài tập 1 ↗</Link>
 
           </div>
         )}
@@ -2407,8 +2371,8 @@ export default function Home() {
         <div className="hero">
           <div style={{ maxWidth: "100%" }}>
             <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "12px", marginBottom: "14px" }}>
-              <div className="hero-pill" style={{ margin: 0, background: "rgba(50, 157, 210, 0.15)", borderColor: "rgba(50, 157, 210, 0.4)", color: "#38bdf8" }}>
-                <span className="dot" style={{ background: "#38bdf8" }} />
+              <div className="hero-pill" style={{ margin: 0, background: "rgba(16, 185, 129, 0.15)", borderColor: "rgba(16, 185, 129, 0.4)", color: "#34d399" }}>
+                <span className="dot" style={{ background: "#34d399" }} />
                 <span>NỀN TẢNG ĐẶT LỊCH THỂ THAO TRỰC TUYẾN SỐ 1 BUÔN MA THUỘT</span>
               </div>
               <div className="weather-widget">
@@ -2418,7 +2382,7 @@ export default function Home() {
             </div>
 
             <h1 style={{ fontSize: "clamp(28px, 4.5vw, 46px)", lineHeight: 1.2, marginBottom: "12px" }}>
-              Đặt Lịch Sân & Cáp Kèo Thi Đấu Nhanh Chóng<br /><span style={{ color: "#329dd2" }}>Giữ Chỗ Tức Thì 24/7</span> · Sân Nhà FC
+              Đặt Lịch Sân & Cáp Kèo Thi Đấu Nhanh Chóng<br /><span style={{ color: "#10b981" }}>Giữ Chỗ Tức Thì 24/7</span> · Sân Nhà FC
             </h1>
             <p className="hero-sub" style={{ maxWidth: "820px", fontSize: "15px", marginBottom: "20px" }}>
               Sân Nhà FC - Nền tảng kết nối 21 cụm sân bóng đá cỏ nhân tạo & tự nhiên tại TP. Buôn Ma Thuột. Sàn cáp kèo phủi, tổ đội FC 15 người và leo rank ELO giải đấu hấp dẫn. Kết nối cáp kèo phủi, quản lý FC 15 người và leo rank ELO giải đấu hấp dẫn.
@@ -2428,7 +2392,7 @@ export default function Home() {
             <div className="alo-hero-widget">
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "14px", flexWrap: "wrap", gap: "8px" }}>
                 <div style={{ fontSize: "13px", fontWeight: 800, color: "#ffffff", display: "flex", alignItems: "center", gap: "8px" }}>
-                  <span style={{ color: "#38bdf8" }}>⚡</span> TÌM KIẾM SÂN BÓNG &amp; KIỂM TRA CA TRỐNG THEO THỜI GIAN THỰC
+                  <span style={{ color: "#34d399" }}>⚡</span> TÌM KIẾM SÂN BÓNG &amp; KIỂM TRA CA TRỐNG THEO THỜI GIAN THỰC
                 </div>
                 <div style={{ fontSize: "12px", color: "#94a3b8" }}>
                   Cập nhật trực tiếp từ CSDL Neon Cloud
@@ -2687,7 +2651,7 @@ export default function Home() {
         </div>
 
         {gpsNotice && (
-          <div style={{ background: "rgba(50, 157, 210, 0.12)", border: "1px solid var(--primary)", color: "#f1f5f9", padding: "12px 16px", borderRadius: "10px", fontWeight: "700", marginBottom: "16px", fontSize: "13px" }}>
+          <div style={{ background: "rgba(16, 185, 129, 0.12)", border: "1px solid var(--primary)", color: "#f1f5f9", padding: "12px 16px", borderRadius: "10px", fontWeight: "700", marginBottom: "16px", fontSize: "13px" }}>
             {gpsNotice}
           </div>
         )}
@@ -2726,7 +2690,7 @@ export default function Home() {
                   key={f.id}
                   style={{
                     border: isSelected ? "2px solid var(--primary)" : "1.5px solid var(--border)",
-                    background: isSelected ? "rgba(50, 157, 210, 0.12)" : "var(--surface-alt)",
+                    background: isSelected ? "rgba(16, 185, 129, 0.12)" : "var(--surface-alt)",
                     borderRadius: "16px",
                     overflow: "hidden",
                     boxShadow: "var(--shadow-sm)",
@@ -2738,7 +2702,7 @@ export default function Home() {
                 >
                   <div style={{ position: "relative", height: "120px" }}>
                     <img src={f.imageUrl || ""} alt={f.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                    <span style={{ position: "absolute", top: "8px", right: "8px", background: "rgba(8, 15, 27, 0.85)", color: "#329dd2", border: "1px solid rgba(50, 157, 210, 0.3)", padding: "3px 8px", borderRadius: "999px", fontSize: "10px", fontWeight: "700" }}>
+                    <span style={{ position: "absolute", top: "8px", right: "8px", background: "rgba(8, 15, 27, 0.85)", color: "#10b981", border: "1px solid rgba(16, 185, 129, 0.3)", padding: "3px 8px", borderRadius: "999px", fontSize: "10px", fontWeight: "700" }}>
                       📍 {f.ward}
                     </span>
                   </div>
@@ -2770,7 +2734,7 @@ export default function Home() {
                         target="_blank"
                         rel="noreferrer"
                         className="outline-button"
-                        style={{ padding: "8px 12px", fontSize: "11px", display: "inline-flex", alignItems: "center", textDecoration: "none", color: "#329dd2" }}
+                        style={{ padding: "8px 12px", fontSize: "11px", display: "inline-flex", alignItems: "center", textDecoration: "none", color: "#10b981" }}
                         title={`Chỉ đường Google Maps đến ${f.name} (${f.address})`}
                       >
                         🧭 Chỉ đường
@@ -2840,15 +2804,15 @@ export default function Home() {
             })
             .map((post) => {
               const isOpen = post.status === "OPEN";
-              const levelBg = post.level === "BAN_CHUYEN" ? "rgba(235, 47, 51, 0.2)" : post.level === "TRUNG_BINH" ? "rgba(50, 157, 210, 0.2)" : "rgba(148, 163, 184, 0.15)";
-              const levelColor = post.level === "BAN_CHUYEN" ? "#ff474b" : post.level === "TRUNG_BINH" ? "#329dd2" : "#cbd5e1";
+              const levelBg = post.level === "BAN_CHUYEN" ? "rgba(235, 47, 51, 0.2)" : post.level === "TRUNG_BINH" ? "rgba(16, 185, 129, 0.2)" : "rgba(148, 163, 184, 0.15)";
+              const levelColor = post.level === "BAN_CHUYEN" ? "#ff474b" : post.level === "TRUNG_BINH" ? "#10b981" : "#cbd5e1";
 
               return (
                 <div
                   key={post.id}
                   style={{
                     background: "var(--surface-alt)",
-                    border: `1.5px solid ${isOpen ? "rgba(50, 157, 210, 0.35)" : "var(--border)"}`,
+                    border: `1.5px solid ${isOpen ? "rgba(16, 185, 129, 0.35)" : "var(--border)"}`,
                     borderRadius: "16px",
                     padding: "20px",
                     boxShadow: "var(--shadow-sm)",
@@ -2868,7 +2832,7 @@ export default function Home() {
                           <small style={{ color: "var(--text-muted)" }}>Đội trưởng: {post.captainName} · {post.createdAt}</small>
                         </div>
                       </div>
-                      <span style={{ fontSize: "11px", padding: "4px 10px", borderRadius: "999px", fontWeight: "800", background: isOpen ? "rgba(50, 157, 210, 0.15)" : "rgba(235, 47, 51, 0.15)", color: isOpen ? "#329dd2" : "#eb2f33", border: `1px solid ${isOpen ? "rgba(50, 157, 210, 0.3)" : "rgba(235, 47, 51, 0.3)"}` }}>
+                      <span style={{ fontSize: "11px", padding: "4px 10px", borderRadius: "999px", fontWeight: "800", background: isOpen ? "rgba(16, 185, 129, 0.15)" : "rgba(235, 47, 51, 0.15)", color: isOpen ? "#10b981" : "#eb2f33", border: `1px solid ${isOpen ? "rgba(16, 185, 129, 0.3)" : "rgba(235, 47, 51, 0.3)"}` }}>
                         {isOpen ? "● ĐANG TÌM ĐỐI" : "✓ ĐÃ CÁP KÈO"}
                       </span>
                     </div>
@@ -2906,14 +2870,14 @@ export default function Home() {
                         🤝 Bắt đối ngay
                       </button>
                     ) : (
-                      <div style={{ flex: 1, textAlign: "center", fontSize: "12px", fontWeight: "700", color: "#329dd2", background: "rgba(50, 157, 210, 0.15)", border: "1px solid rgba(50, 157, 210, 0.3)", padding: "8px", borderRadius: "8px" }}>
+                      <div style={{ flex: 1, textAlign: "center", fontSize: "12px", fontWeight: "700", color: "#10b981", background: "rgba(16, 185, 129, 0.15)", border: "1px solid rgba(16, 185, 129, 0.3)", padding: "8px", borderRadius: "8px" }}>
                         Đã cáp với: {post.matchedBy || "Đội bạn"}
                       </div>
                     )}
                     <a href={`tel:${post.phone}`} className="outline-button" style={{ padding: "9px 12px", fontSize: "12px", display: "inline-flex", alignItems: "center" }} title="Gọi điện">
                       📞
                     </a>
-                    <a href={`https://zalo.me/${post.phone}`} target="_blank" rel="noreferrer" className="outline-button" style={{ padding: "9px 12px", fontSize: "12px", color: "#329dd2", display: "inline-flex", alignItems: "center" }} title="Nhắn Zalo">
+                    <a href={`https://zalo.me/${post.phone}`} target="_blank" rel="noreferrer" className="outline-button" style={{ padding: "9px 12px", fontSize: "12px", color: "#10b981", display: "inline-flex", alignItems: "center" }} title="Nhắn Zalo">
                       💬
                     </a>
                   </div>
@@ -2956,12 +2920,12 @@ export default function Home() {
 
         {/* ELO Ranking Guide */}
         <div style={{ background: "linear-gradient(135deg, rgba(8, 15, 27, 0.95), rgba(19, 30, 50, 0.95))", border: "1px solid var(--border)", borderRadius: "14px", padding: "14px", marginBottom: "16px" }}>
-          <div style={{ fontSize: "12px", fontWeight: "800", color: "#329dd2", marginBottom: "8px" }}>📊 Hệ thống Rank ELO Thi Đấu Buôn Ma Thuột:</div>
+          <div style={{ fontSize: "12px", fontWeight: "800", color: "#10b981", marginBottom: "8px" }}>📊 Hệ thống Rank ELO Thi Đấu Buôn Ma Thuột:</div>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", fontSize: "11px" }}>
             <span style={{ padding: "3px 10px", borderRadius: "999px", background: "rgba(245, 158, 11, 0.18)", color: "#f59e0b", fontWeight: 700, border: "1px solid rgba(245, 158, 11, 0.3)" }}>🥉 Đồng (800-1099)</span>
             <span style={{ padding: "3px 10px", borderRadius: "999px", background: "rgba(148, 163, 184, 0.18)", color: "#cbd5e1", fontWeight: 700, border: "1px solid rgba(148, 163, 184, 0.3)" }}>🥈 Bạc (1100-1399)</span>
             <span style={{ padding: "3px 10px", borderRadius: "999px", background: "rgba(234, 179, 8, 0.18)", color: "#fbbf24", fontWeight: 700, border: "1px solid rgba(234, 179, 8, 0.3)" }}>🥇 Vàng (1400-1599)</span>
-            <span style={{ padding: "3px 10px", borderRadius: "999px", background: "rgba(50, 157, 210, 0.18)", color: "#329dd2", fontWeight: 700, border: "1px solid rgba(50, 157, 210, 0.3)" }}>💎 Kim Cương (1600+)</span>
+            <span style={{ padding: "3px 10px", borderRadius: "999px", background: "rgba(16, 185, 129, 0.18)", color: "#10b981", fontWeight: 700, border: "1px solid rgba(16, 185, 129, 0.3)" }}>💎 Kim Cương (1600+)</span>
           </div>
         </div>
 
@@ -3003,7 +2967,7 @@ export default function Home() {
                   <div style={{ padding: "14px" }}>
                     <div style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "8px" }}>{club.description}</div>
                     <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "10px" }}>
-                      <span style={{ fontSize: "10px", fontWeight: 700, padding: "3px 8px", borderRadius: "6px", background: "rgba(50, 157, 210, 0.15)", color: "#329dd2" }}>👤 {club.members.length}/{MAX_CLUB_MEMBERS}</span>
+                      <span style={{ fontSize: "10px", fontWeight: 700, padding: "3px 8px", borderRadius: "6px", background: "rgba(16, 185, 129, 0.15)", color: "#10b981" }}>👤 {club.members.length}/{MAX_CLUB_MEMBERS}</span>
                       <span style={{ fontSize: "10px", fontWeight: 700, padding: "3px 8px", borderRadius: "6px", background: "rgba(245, 158, 11, 0.15)", color: "#f59e0b" }}>🏆 {club.wins}W · {club.draws}D · {club.losses}L</span>
                       <span style={{ fontSize: "10px", fontWeight: 700, padding: "3px 8px", borderRadius: "6px", background: "rgba(255, 255, 255, 0.08)", color: "var(--text-main)" }}>⚽ {club.goalsFor} BT - {club.goalsAgainst} BB</span>
                       {club.isRecruiting && <span style={{ fontSize: "10px", fontWeight: 700, padding: "3px 8px", borderRadius: "6px", background: "rgba(34, 197, 94, 0.15)", color: "#22c55e" }}>🟢 Đang tuyển</span>}
@@ -3011,7 +2975,7 @@ export default function Home() {
                     <div style={{ fontSize: "11px", color: "var(--text-main)", marginBottom: "10px" }}>🎖️ Đội trưởng: <strong>{club.captainName}</strong></div>
                     <div style={{ display: "flex", gap: "6px" }}>
                       {isMember ? (
-                        <div style={{ flex: 1, textAlign: "center", fontSize: "11px", fontWeight: 700, color: "#329dd2", background: "rgba(50, 157, 210, 0.15)", border: "1px solid rgba(50, 157, 210, 0.3)", padding: "8px", borderRadius: "8px" }}>✓ Bạn là thành viên</div>
+                        <div style={{ flex: 1, textAlign: "center", fontSize: "11px", fontWeight: 700, color: "#10b981", background: "rgba(16, 185, 129, 0.15)", border: "1px solid rgba(16, 185, 129, 0.3)", padding: "8px", borderRadius: "8px" }}>✓ Bạn là thành viên</div>
                       ) : isFull ? (
                         <div style={{ flex: 1, textAlign: "center", fontSize: "11px", fontWeight: 700, color: "#eb2f33", background: "rgba(235, 47, 51, 0.15)", border: "1px solid rgba(235, 47, 51, 0.3)", padding: "8px", borderRadius: "8px" }}>Đã đủ 15 người</div>
                       ) : (
@@ -3067,19 +3031,19 @@ export default function Home() {
               return (
                 <div key={m.id} style={{ background: "var(--surface-alt)", border: "1.5px solid var(--border)", borderRadius: "14px", padding: "18px", boxShadow: "var(--shadow-sm)" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px", borderBottom: "1px solid var(--border)", paddingBottom: "8px" }}>
-                    <span style={{ fontSize: "12px", fontWeight: "800", color: "#329dd2", letterSpacing: "0.5px" }}>{m.round}</span>
+                    <span style={{ fontSize: "12px", fontWeight: "800", color: "#10b981", letterSpacing: "0.5px" }}>{m.round}</span>
                     <span style={{ fontSize: "11px", color: "var(--text-muted)" }}>{m.time}</span>
                   </div>
 
                   <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 12px", borderRadius: "8px", background: t1Win ? "rgba(50, 157, 210, 0.2)" : "rgba(0,0,0,0.25)", border: `1px solid ${t1Win ? "rgba(50, 157, 210, 0.4)" : "var(--border)"}`, fontWeight: t1Win ? "800" : "600", color: t1Win ? "#329dd2" : "var(--text-main)" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 12px", borderRadius: "8px", background: t1Win ? "rgba(16, 185, 129, 0.2)" : "rgba(0,0,0,0.25)", border: `1px solid ${t1Win ? "rgba(16, 185, 129, 0.4)" : "var(--border)"}`, fontWeight: t1Win ? "800" : "600", color: t1Win ? "#10b981" : "var(--text-main)" }}>
                       <span style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                         <span>{t1Win ? "👑" : "⚪"}</span> {m.team1.name}
                       </span>
                       <span style={{ fontSize: "16px", fontWeight: "800" }}>{m.team1.score !== null ? m.team1.score : "-"}</span>
                     </div>
 
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 12px", borderRadius: "8px", background: t2Win ? "rgba(50, 157, 210, 0.2)" : "rgba(0,0,0,0.25)", border: `1px solid ${t2Win ? "rgba(50, 157, 210, 0.4)" : "var(--border)"}`, fontWeight: t2Win ? "800" : "600", color: t2Win ? "#329dd2" : "var(--text-main)" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 12px", borderRadius: "8px", background: t2Win ? "rgba(16, 185, 129, 0.2)" : "rgba(0,0,0,0.25)", border: `1px solid ${t2Win ? "rgba(16, 185, 129, 0.4)" : "var(--border)"}`, fontWeight: t2Win ? "800" : "600", color: t2Win ? "#10b981" : "var(--text-main)" }}>
                       <span style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                         <span>{t2Win ? "👑" : "⚪"}</span> {m.team2.name}
                       </span>
@@ -3088,7 +3052,7 @@ export default function Home() {
                   </div>
 
                   {m.winner && (
-                    <div style={{ marginTop: "10px", fontSize: "11px", textAlign: "center", color: "#329dd2", fontWeight: "700", background: "rgba(50, 157, 210, 0.15)", border: "1px solid rgba(50, 157, 210, 0.3)", padding: "4px", borderRadius: "6px" }}>
+                    <div style={{ marginTop: "10px", fontSize: "11px", textAlign: "center", color: "#10b981", fontWeight: "700", background: "rgba(16, 185, 129, 0.15)", border: "1px solid rgba(16, 185, 129, 0.3)", padding: "4px", borderRadius: "6px" }}>
                       Đội chiến thắng: {m.winner}
                     </div>
                   )}
@@ -3104,13 +3068,13 @@ export default function Home() {
                   <th style={{ padding: "12px 8px", width: "50px" }}>Hạng</th>
                   <th style={{ padding: "12px 8px", textAlign: "left" }}>Đội bóng</th>
                   <th style={{ padding: "12px 8px" }}>Trận</th>
-                  <th style={{ padding: "12px 8px", color: "#329dd2" }}>Thắng</th>
+                  <th style={{ padding: "12px 8px", color: "#10b981" }}>Thắng</th>
                   <th style={{ padding: "12px 8px" }}>Hòa</th>
                   <th style={{ padding: "12px 8px", color: "#eb2f33" }}>Thua</th>
                   <th style={{ padding: "12px 8px" }}>BT</th>
                   <th style={{ padding: "12px 8px" }}>BB</th>
                   <th style={{ padding: "12px 8px" }}>HS</th>
-                  <th style={{ padding: "12px 8px", background: "rgba(50, 157, 210, 0.15)", color: "#329dd2", fontWeight: "900" }}>Điểm</th>
+                  <th style={{ padding: "12px 8px", background: "rgba(16, 185, 129, 0.15)", color: "#10b981", fontWeight: "900" }}>Điểm</th>
                 </tr>
               </thead>
               <tbody>
@@ -3121,13 +3085,13 @@ export default function Home() {
                       <td style={{ padding: "12px 8px", fontWeight: "800", fontSize: "14px" }}>{medal}</td>
                       <td style={{ padding: "12px 8px", textAlign: "left", fontWeight: "700", color: "var(--text-main)" }}>{s.team}</td>
                       <td style={{ padding: "12px 8px" }}>{s.played}</td>
-                      <td style={{ padding: "12px 8px", color: "#329dd2", fontWeight: "700" }}>{s.won}</td>
+                      <td style={{ padding: "12px 8px", color: "#10b981", fontWeight: "700" }}>{s.won}</td>
                       <td style={{ padding: "12px 8px", color: "var(--text-muted)" }}>{s.drawn}</td>
                       <td style={{ padding: "12px 8px", color: "#eb2f33" }}>{s.lost}</td>
                       <td style={{ padding: "12px 8px" }}>{s.gf}</td>
                       <td style={{ padding: "12px 8px" }}>{s.ga}</td>
                       <td style={{ padding: "12px 8px", fontWeight: "600" }}>{s.gd}</td>
-                      <td style={{ padding: "12px 8px", background: "rgba(50, 157, 210, 0.15)", color: "#329dd2", fontWeight: "900", fontSize: "14px" }}>{s.pts}</td>
+                      <td style={{ padding: "12px 8px", background: "rgba(16, 185, 129, 0.15)", color: "#10b981", fontWeight: "900", fontSize: "14px" }}>{s.pts}</td>
                     </tr>
                   );
                 })}
@@ -3269,7 +3233,7 @@ export default function Home() {
 
                   <div className="pitch-body">
                     <div className="pitch-meta" style={{ flexWrap: "wrap", gap: "6px" }}>
-                      <span className="pitch-type-pill" style={{ background: "#0f172a", color: "#38bdf8", fontWeight: "800" }}>
+                      <span className="pitch-type-pill" style={{ background: "#0f172a", color: "#34d399", fontWeight: "800" }}>
                         🏢 CỤM SÂN MẸ
                       </span>
                       {field.ward && (
@@ -3413,29 +3377,29 @@ export default function Home() {
           return (
             <div
               style={{
-                background: "linear-gradient(135deg, #0e1626 0%, #131e32 100%)",
+                background: "linear-gradient(135deg, #0f172a 0%, #131e32 100%)",
                 color: "#ffffff",
                 borderRadius: "20px",
                 padding: "24px 28px",
                 marginBottom: "28px",
-                border: "1px solid rgba(50, 157, 210, 0.35)",
+                border: "1px solid rgba(16, 185, 129, 0.35)",
                 boxShadow: "0 12px 30px rgba(0, 0, 0, 0.55)",
               }}
             >
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "16px", marginBottom: "16px" }}>
                 <div>
                   <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap", marginBottom: "8px" }}>
-                    <span style={{ background: "#329dd2", color: "#ffffff", padding: "4px 12px", borderRadius: "999px", fontSize: "11px", fontWeight: "800", letterSpacing: "0.5px" }}>
+                    <span style={{ background: "#10b981", color: "#ffffff", padding: "4px 12px", borderRadius: "999px", fontSize: "11px", fontWeight: "800", letterSpacing: "0.5px" }}>
                       🏢 CỤM SÂN MẸ ĐANG CHỌN
                     </span>
-                    <span style={{ fontSize: "12px", background: "rgba(255,255,255,0.06)", padding: "4px 10px", borderRadius: "8px", color: "#38bdf8", fontFamily: "monospace", border: "1px solid rgba(50, 157, 210, 0.25)" }}>
+                    <span style={{ fontSize: "12px", background: "rgba(255,255,255,0.06)", padding: "4px 10px", borderRadius: "8px", color: "#34d399", fontFamily: "monospace", border: "1px solid rgba(16, 185, 129, 0.25)" }}>
                       🔗 API riêng: /api/v1/fields/{activePitch.id}/schedule?subPitch={selectedSubPitchId}
                     </span>
                   </div>
                   <h2 style={{ margin: "4px 0", fontSize: "26px", color: "#ffffff" }}>{activePitch.name}</h2>
                   <div style={{ fontSize: "13px", color: "#94a3b8", display: "flex", flexWrap: "wrap", gap: "14px", marginTop: "6px" }}>
                     {activePitch.ownerName && (
-                      <span style={{ color: "#38bdf8", fontWeight: "700" }}>👨‍💼 Chủ sân: {activePitch.ownerName}</span>
+                      <span style={{ color: "#34d399", fontWeight: "700" }}>👨‍💼 Chủ sân: {activePitch.ownerName}</span>
                     )}
                     {activePitch.phone && (
                       <span style={{ color: "#f59e0b", fontWeight: "700" }}>📞 Hotline: {activePitch.phone}</span>
@@ -3453,7 +3417,7 @@ export default function Home() {
                     style={{
                       background: "rgba(255,255,255,0.08)",
                       color: "#ffffff",
-                      border: "1px solid rgba(50, 157, 210, 0.3)",
+                      border: "1px solid rgba(16, 185, 129, 0.3)",
                       padding: "8px 12px",
                       borderRadius: "8px",
                       fontSize: "13px",
@@ -3463,7 +3427,7 @@ export default function Home() {
                     }}
                   >
                     {fieldsList.map((f) => (
-                      <option key={f.id} value={f.id} style={{ background: "#0e1626", color: "#ffffff" }}>
+                      <option key={f.id} value={f.id} style={{ background: "#0f172a", color: "#ffffff" }}>
                         {f.name} ({f.ward})
                       </option>
                     ))}
@@ -3474,8 +3438,8 @@ export default function Home() {
               {/* Thông báo cơ chế quản lý & phân phối */}
               <div
                 style={{
-                  background: "rgba(50, 157, 210, 0.08)",
-                  border: "1px solid rgba(50, 157, 210, 0.25)",
+                  background: "rgba(16, 185, 129, 0.08)",
+                  border: "1px solid rgba(16, 185, 129, 0.25)",
                   borderRadius: "12px",
                   padding: "12px 16px",
                   marginBottom: "20px",
@@ -3484,7 +3448,7 @@ export default function Home() {
                   lineHeight: "1.6",
                 }}
               >
-                📢 <strong style={{ color: "#38bdf8" }}>CƠ CHẾ VẬN HÀNH:</strong> Sân Nhà là nền tảng quản lý tập trung 21 cụm sân tại Buôn Ma Thuột.
+                📢 <strong style={{ color: "#34d399" }}>CƠ CHẾ VẬN HÀNH:</strong> Sân Nhà là nền tảng quản lý tập trung 21 cụm sân tại Buôn Ma Thuột.
                 Sân mẹ là cơ sở chung, quý khách <strong>chọn SÂN CON (Sân 5 / Sân 7 / Sân 11) cụ thể bên dưới</strong>. Sau khi hoàn tất đặt sân con, hệ thống sẽ <strong>tự động chuyển thông báo trực tiếp đến Chủ sân ({activePitch.ownerName || "Ban quản lý"} - {activePitch.phone})</strong> để chuẩn bị sẵn sàng trước giờ đá!
               </div>
 
@@ -3496,11 +3460,11 @@ export default function Home() {
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: "10px" }}>
                   <div style={{ position: "relative", borderRadius: "10px", overflow: "hidden", height: "115px", border: "1px solid rgba(255,255,255,0.12)", boxShadow: "0 4px 12px rgba(0,0,0,0.4)" }}>
                     <img src={activePitch.imageUrl || "https://images.unsplash.com/photo-1529900748604-07564a03e7a6?w=900&auto=format&fit=crop&q=80"} alt={`${activePitch.name} - Toàn cảnh`} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                    <span style={{ position: "absolute", bottom: "4px", left: "6px", background: "rgba(0,0,0,0.75)", color: "#38bdf8", fontSize: "10px", fontWeight: "700", padding: "2px 6px", borderRadius: "4px" }}>Toàn cảnh cụm sân</span>
+                    <span style={{ position: "absolute", bottom: "4px", left: "6px", background: "rgba(0,0,0,0.75)", color: "#34d399", fontSize: "10px", fontWeight: "700", padding: "2px 6px", borderRadius: "4px" }}>Toàn cảnh cụm sân</span>
                   </div>
                   <div style={{ position: "relative", borderRadius: "10px", overflow: "hidden", height: "115px", border: "1px solid rgba(255,255,255,0.12)", boxShadow: "0 4px 12px rgba(0,0,0,0.4)" }}>
                     <img src="https://images.unsplash.com/photo-1511886929837-354d827aae26?w=900&auto=format&fit=crop&q=80" alt="Mặt cỏ nhân tạo Pro chuẩn FIFA" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                    <span style={{ position: "absolute", bottom: "4px", left: "6px", background: "rgba(0,0,0,0.75)", color: "#38bdf8", fontSize: "10px", fontWeight: "700", padding: "2px 6px", borderRadius: "4px" }}>Mặt cỏ chuẩn FIFA</span>
+                    <span style={{ position: "absolute", bottom: "4px", left: "6px", background: "rgba(0,0,0,0.75)", color: "#34d399", fontSize: "10px", fontWeight: "700", padding: "2px 6px", borderRadius: "4px" }}>Mặt cỏ chuẩn FIFA</span>
                   </div>
                   <div style={{ position: "relative", borderRadius: "10px", overflow: "hidden", height: "115px", border: "1px solid rgba(255,255,255,0.12)", boxShadow: "0 4px 12px rgba(0,0,0,0.4)" }}>
                     <img src="https://images.unsplash.com/photo-1577223625816-7546f13df25d?w=900&auto=format&fit=crop&q=80" alt="Dàn đèn LED 400W chiếu sáng đêm" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
@@ -3514,7 +3478,7 @@ export default function Home() {
               </div>
 
               {/* Sub-pitch selector grid (SÂN CON THỰC TẾ) */}
-              <div style={{ background: "rgba(10, 16, 28, 0.75)", padding: "18px", borderRadius: "16px", border: "1px solid rgba(50, 157, 210, 0.2)" }}>
+              <div style={{ background: "rgba(10, 16, 28, 0.75)", padding: "18px", borderRadius: "16px", border: "1px solid rgba(16, 185, 129, 0.2)" }}>
                 <div style={{ fontSize: "12px", fontWeight: "800", color: "#94a3b8", marginBottom: "14px", textTransform: "uppercase", letterSpacing: "0.5px", display: "flex", alignItems: "center", gap: "6px" }}>
                   <span>⚡</span> BƯỚC 1: CHỌN SÂN CON THỰC TẾ CỦA [ {activePitch.name} ] ({availableSubPitches.length} SÂN):
                 </div>
@@ -3533,24 +3497,24 @@ export default function Home() {
                           type="button"
                           onClick={() => handleSelectSubPitch(sp)}
                           style={{
-                            background: isSubSelected ? "linear-gradient(135deg, rgba(50, 157, 210, 0.3), rgba(31, 127, 174, 0.45))" : "rgba(255,255,255,0.04)",
-                            border: isSubSelected ? "2px solid #329dd2" : "1px solid rgba(255,255,255,0.12)",
+                            background: isSubSelected ? "linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(31, 127, 174, 0.45))" : "rgba(255,255,255,0.04)",
+                            border: isSubSelected ? "2px solid #10b981" : "1px solid rgba(255,255,255,0.12)",
                             color: "#ffffff",
                             padding: "14px 16px",
                             borderRadius: "14px",
                             cursor: "pointer",
                             textAlign: "left",
                             transition: "all 0.2s ease",
-                            boxShadow: isSubSelected ? "0 6px 20px rgba(50, 157, 210, 0.35)" : "none",
+                            boxShadow: isSubSelected ? "0 6px 20px rgba(16, 185, 129, 0.35)" : "none",
                           }}
                         >
                           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                            <span style={{ fontWeight: "800", fontSize: "15px", color: isSubSelected ? "#38bdf8" : "#f1f5f9" }}>
+                            <span style={{ fontWeight: "800", fontSize: "15px", color: isSubSelected ? "#34d399" : "#f1f5f9" }}>
                               {sp.category === "SAN_11" ? "⭐ " : sp.category === "SAN_7" ? "🏆 " : "⚽ "}
                               {sp.name}
                             </span>
                             {isSubSelected && (
-                              <span style={{ background: "#329dd2", color: "#ffffff", fontSize: "10px", fontWeight: "900", padding: "2px 8px", borderRadius: "999px" }}>
+                              <span style={{ background: "#10b981", color: "#ffffff", fontSize: "10px", fontWeight: "900", padding: "2px 8px", borderRadius: "999px" }}>
                                 ĐANG CHỌN ✓
                               </span>
                             )}
@@ -3561,7 +3525,7 @@ export default function Home() {
                           <div style={{ fontSize: "11px", color: "#cbd5e1", marginTop: "2px" }}>
                             {sp.highlight}
                           </div>
-                          <div style={{ fontSize: "14px", fontWeight: "800", color: "#38bdf8", marginTop: "8px" }}>
+                          <div style={{ fontSize: "14px", fontWeight: "800", color: "#34d399", marginTop: "8px" }}>
                             {money(sp.basePrice)} / ca
                           </div>
                         </button>
@@ -3588,20 +3552,20 @@ export default function Home() {
           </label>
 
           <div className="quick-days">
-            <button className="quick-day-btn" onClick={() => setQuickDate(0)} style={{ background: "rgba(50, 157, 210, 0.15)", color: "#38bdf8", border: "1px solid rgba(50, 157, 210, 0.3)" }}>Hôm nay</button>
+            <button className="quick-day-btn" onClick={() => setQuickDate(0)} style={{ background: "rgba(16, 185, 129, 0.15)", color: "#34d399", border: "1px solid rgba(16, 185, 129, 0.3)" }}>Hôm nay</button>
             <button className="quick-day-btn" onClick={() => setQuickDate(1)} style={{ background: "rgba(255, 255, 255, 0.05)", color: "#cbd5e1", border: "1px solid var(--border)" }}>Ngày mai</button>
             <button className="quick-day-btn" onClick={() => setQuickDate(2)} style={{ background: "rgba(255, 255, 255, 0.05)", color: "#cbd5e1", border: "1px solid var(--border)" }}>Hôm sau</button>
           </div>
 
           <div style={{ marginLeft: "auto", fontSize: "13px", color: "#94a3b8", fontWeight: "600" }}>
-            Đang xem: <strong style={{ color: "#38bdf8" }}>{activeSubPitch.name}</strong> ({activeSubPitch.categoryName})
+            Đang xem: <strong style={{ color: "#34d399" }}>{activeSubPitch.name}</strong> ({activeSubPitch.categoryName})
           </div>
         </div>
 
         {/* Legend */}
         <div className="legend-bar" style={{ background: "var(--surface-alt)", border: "1px solid var(--border)", padding: "12px 18px", borderRadius: "12px" }}>
           <div className="legend-item">
-            <span className="legend-box" style={{ background: "rgba(50, 157, 210, 0.2)", border: "1px solid #329dd2" }} />
+            <span className="legend-box" style={{ background: "rgba(16, 185, 129, 0.2)", border: "1px solid #10b981" }} />
             <span style={{ color: "#cbd5e1" }}>Còn trống (Click để đặt ca)</span>
           </div>
           <div className="legend-item">
@@ -3627,17 +3591,17 @@ export default function Home() {
                     <h3 style={{ margin: 0, color: "#ffffff", fontSize: "20px" }}>
                       ⚡ BƯỚC 2: CHỌN CA THI ĐẤU CỦA: {activeSubPitch.name}
                     </h3>
-                    <span style={{ fontSize: "12px", background: "rgba(50, 157, 210, 0.15)", color: "#38bdf8", padding: "3px 10px", borderRadius: "6px", fontWeight: "700", border: "1px solid rgba(50, 157, 210, 0.3)" }}>
+                    <span style={{ fontSize: "12px", background: "rgba(16, 185, 129, 0.15)", color: "#34d399", padding: "3px 10px", borderRadius: "6px", fontWeight: "700", border: "1px solid rgba(16, 185, 129, 0.3)" }}>
                       {activeSubPitch.categoryName}
                     </span>
                   </div>
                   <div style={{ fontSize: "13px", color: "#94a3b8", marginTop: "4px" }}>
-                    Thuộc <strong>{activePitch.name}</strong> · 👨‍💼 Chủ sân: <strong style={{ color: "#38bdf8" }}>{activePitch.ownerName}</strong> (Hotline: <strong style={{ color: "#f59e0b" }}>{activePitch.phone}</strong>) · Ngày: <strong>{date}</strong> ({isWeekend ? "Cuối tuần" : "Ngày thường"})
+                    Thuộc <strong>{activePitch.name}</strong> · 👨‍💼 Chủ sân: <strong style={{ color: "#34d399" }}>{activePitch.ownerName}</strong> (Hotline: <strong style={{ color: "#f59e0b" }}>{activePitch.phone}</strong>) · Ngày: <strong>{date}</strong> ({isWeekend ? "Cuối tuần" : "Ngày thường"})
                   </div>
                 </div>
 
                 <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                  <span style={{ fontSize: "13px", color: "#38bdf8", fontWeight: "700", background: "rgba(50, 157, 210, 0.12)", padding: "6px 12px", borderRadius: "8px", border: "1px solid rgba(50, 157, 210, 0.3)" }}>
+                  <span style={{ fontSize: "13px", color: "#34d399", fontWeight: "700", background: "rgba(16, 185, 129, 0.12)", padding: "6px 12px", borderRadius: "8px", border: "1px solid rgba(16, 185, 129, 0.3)" }}>
                     ● 100% Sẵn sàng nhận đơn &amp; Báo Chủ sân
                   </span>
                 </div>
@@ -3720,8 +3684,8 @@ export default function Home() {
               )}
 
               {/* Thông báo điều phối gửi chủ sân */}
-              <div style={{ background: "rgba(50, 157, 210, 0.1)", border: "1px solid rgba(50, 157, 210, 0.25)", color: "#cbd5e1", padding: "12px 16px", borderRadius: "10px", fontSize: "13px", marginBottom: "16px", lineHeight: "1.6" }}>
-                🔔 <strong style={{ color: "#38bdf8" }}>HỆ THỐNG QUẢN LÝ SÂN NHÀ:</strong> Khi bấm xác nhận, hệ thống sẽ <strong>tự động chuyển thông báo đơn đặt đến Chủ sân ({bookingModal.field.ownerName || "Ban quản lý"} - Hotline: {bookingModal.field.phone})</strong> để chủ sân chuẩn bị bật đèn và đón tiếp đội của bạn!
+              <div style={{ background: "rgba(16, 185, 129, 0.1)", border: "1px solid rgba(16, 185, 129, 0.25)", color: "#cbd5e1", padding: "12px 16px", borderRadius: "10px", fontSize: "13px", marginBottom: "16px", lineHeight: "1.6" }}>
+                🔔 <strong style={{ color: "#34d399" }}>HỆ THỐNG QUẢN LÝ SÂN NHÀ:</strong> Khi bấm xác nhận, hệ thống sẽ <strong>tự động chuyển thông báo đơn đặt đến Chủ sân ({bookingModal.field.ownerName || "Ban quản lý"} - Hotline: {bookingModal.field.phone})</strong> để chủ sân chuẩn bị bật đèn và đón tiếp đội của bạn!
               </div>
 
               {/* Booking Summary Box */}
@@ -3732,7 +3696,7 @@ export default function Home() {
                 </div>
                 <div className="summary-row">
                   <span>⚽ Sân con được đặt:</span>
-                  <strong style={{ color: "#38bdf8", fontSize: "15px" }}>
+                  <strong style={{ color: "#34d399", fontSize: "15px" }}>
                     {bookingModal.subPitch.name} ({bookingModal.subPitch.categoryName})
                   </strong>
                 </div>
@@ -3752,7 +3716,7 @@ export default function Home() {
                 </div>
                 <div className="summary-row">
                   <span>Giá thuê sân con:</span>
-                  <strong style={{ color: "#38bdf8" }}>{money(bookingModal.slot.price ?? bookingModal.subPitch.basePrice)}</strong>
+                  <strong style={{ color: "#34d399" }}>{money(bookingModal.slot.price ?? bookingModal.subPitch.basePrice)}</strong>
                 </div>
 
                 {/* Additional services summary */}
@@ -3824,7 +3788,7 @@ export default function Home() {
 
               {/* Customer Inputs */}
               {currentUser && (
-                <div style={{ background: "rgba(50, 157, 210, 0.12)", border: "1px solid rgba(50, 157, 210, 0.3)", padding: "8px 12px", borderRadius: "8px", fontSize: "12px", color: "#38bdf8", marginBottom: "12px" }}>
+                <div style={{ background: "rgba(16, 185, 129, 0.12)", border: "1px solid rgba(16, 185, 129, 0.3)", padding: "8px 12px", borderRadius: "8px", fontSize: "12px", color: "#34d399", marginBottom: "12px" }}>
                   ✓ Đã tự động điền thông tin từ tài khoản Neon của bạn (<strong>{currentUser.fullName}</strong>).
                 </div>
               )}
@@ -3891,9 +3855,9 @@ export default function Home() {
                 style={{
                   width: "60px",
                   height: "60px",
-                  background: "rgba(50, 157, 210, 0.15)",
-                  color: "#38bdf8",
-                  border: "2px solid #329dd2",
+                  background: "rgba(16, 185, 129, 0.15)",
+                  color: "#34d399",
+                  border: "2px solid #10b981",
                   borderRadius: "50%",
                   display: "flex",
                   alignItems: "center",
@@ -3906,7 +3870,7 @@ export default function Home() {
               </div>
 
               <h2 style={{ fontSize: "22px", margin: "0 0 4px", color: "#ffffff" }}>🎉 Đặt Sân Con Thành Công!</h2>
-              <div style={{ display: "inline-block", background: "rgba(50, 157, 210, 0.15)", color: "#38bdf8", border: "1px solid rgba(50, 157, 210, 0.35)", fontWeight: "800", fontSize: "12px", padding: "4px 12px", borderRadius: "999px", marginBottom: "16px" }}>
+              <div style={{ display: "inline-block", background: "rgba(16, 185, 129, 0.15)", color: "#34d399", border: "1px solid rgba(16, 185, 129, 0.35)", fontWeight: "800", fontSize: "12px", padding: "4px 12px", borderRadius: "999px", marginBottom: "16px" }}>
                 🔔 HỆ THỐNG ĐÃ TỰ ĐỘNG BÁO CHO CHỦ SÂN
               </div>
 
@@ -3917,19 +3881,19 @@ export default function Home() {
               <div
                 style={{
                   background: "var(--surface-alt)",
-                  border: "2px dashed rgba(50, 157, 210, 0.45)",
+                  border: "2px dashed rgba(16, 185, 129, 0.45)",
                   borderRadius: "12px",
                   padding: "16px 20px",
                   margin: "0 0 20px",
                   textAlign: "left",
                 }}
               >
-                <div style={{ fontSize: "11px", color: "#38bdf8", fontWeight: "700", letterSpacing: "0.5px" }}>MÃ VÉ ĐẶT SÂN:</div>
+                <div style={{ fontSize: "11px", color: "#34d399", fontWeight: "700", letterSpacing: "0.5px" }}>MÃ VÉ ĐẶT SÂN:</div>
                 <div style={{ fontSize: "24px", fontWeight: "900", color: "#ffffff", letterSpacing: "1px" }}>
                   {successReceipt.bookingCode}
                 </div>
                 <div style={{ fontSize: "14px", color: "#f1f5f9", marginTop: "10px", fontWeight: "700" }}>
-                  ⚽ Sân con đã đặt: <span style={{ color: "#38bdf8" }}>{successReceipt.subPitchName}</span> ({successReceipt.categoryName})
+                  ⚽ Sân con đã đặt: <span style={{ color: "#34d399" }}>{successReceipt.subPitchName}</span> ({successReceipt.categoryName})
                 </div>
                 <div style={{ fontSize: "13px", color: "#cbd5e1", marginTop: "4px" }}>
                   🏢 Cụm sân mẹ: <strong>{successReceipt.parentVenueName}</strong>
@@ -3943,7 +3907,7 @@ export default function Home() {
                 <div style={{ fontSize: "15px", fontWeight: "800", color: "#f59e0b", marginTop: "6px" }}>
                   💰 Tổng tiền: {money(successReceipt.totalPrice)}
                 </div>
-                <div style={{ fontSize: "12px", color: "#38bdf8", fontWeight: "700", marginTop: "8px", background: "rgba(50, 157, 210, 0.12)", padding: "6px 10px", borderRadius: "6px", border: "1px solid rgba(50, 157, 210, 0.3)" }}>
+                <div style={{ fontSize: "12px", color: "#34d399", fontWeight: "700", marginTop: "8px", background: "rgba(16, 185, 129, 0.12)", padding: "6px 10px", borderRadius: "6px", border: "1px solid rgba(16, 185, 129, 0.3)" }}>
                   🟢 Trạng thái: Đã gửi thông báo xác nhận đến Chủ sân để giữ sân và bật đèn
                 </div>
               </div>
@@ -4066,7 +4030,7 @@ export default function Home() {
                 <button
                   type="button"
                   className="outline-button"
-                  style={{ flex: 1, minWidth: "140px", borderColor: "#38bdf8", color: "#38bdf8" }}
+                  style={{ flex: 1, minWidth: "140px", borderColor: "#34d399", color: "#34d399" }}
                   onClick={() => window.print()}
                 >
                   🖨️ In Vé / Lưu PDF
@@ -4147,21 +4111,21 @@ export default function Home() {
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }}>
           <div style={{ background: "var(--surface-alt)", padding: "24px", borderRadius: "14px", border: "1px solid var(--border)" }}>
-            <span style={{ fontSize: "28px", color: "#329dd2", fontWeight: 800 }}>01</span>
+            <span style={{ fontSize: "28px", color: "#10b981", fontWeight: 800 }}>01</span>
             <h4 style={{ margin: "12px 0 8px", fontSize: "18px", color: "var(--text-main)" }}>Chọn sân &amp; ca đá</h4>
             <p style={{ fontSize: "13px", color: "var(--text-muted)", margin: 0 }}>
               Kiểm tra lịch sân trống trực tiếp theo ngày, loại sân 5 hoặc 7 và xem trước giá tạm tính.
             </p>
           </div>
           <div style={{ background: "var(--surface-alt)", padding: "24px", borderRadius: "14px", border: "1px solid var(--border)" }}>
-            <span style={{ fontSize: "28px", color: "#329dd2", fontWeight: 800 }}>02</span>
+            <span style={{ fontSize: "28px", color: "#10b981", fontWeight: 800 }}>02</span>
             <h4 style={{ margin: "12px 0 8px", fontSize: "18px", color: "var(--text-main)" }}>Xác nhận &amp; Giữ chỗ</h4>
             <p style={{ fontSize: "13px", color: "var(--text-muted)", margin: 0 }}>
               Backend khóa chỗ trong Transaction chống trùng lặp, tự động snapshot biểu giá cố định.
             </p>
           </div>
           <div style={{ background: "var(--surface-alt)", padding: "24px", borderRadius: "14px", border: "1px solid var(--border)" }}>
-            <span style={{ fontSize: "28px", color: "#329dd2", fontWeight: 800 }}>03</span>
+            <span style={{ fontSize: "28px", color: "#10b981", fontWeight: 800 }}>03</span>
             <h4 style={{ margin: "12px 0 8px", fontSize: "18px", color: "var(--text-main)" }}>Nhận vé &amp; Ra sân</h4>
             <p style={{ fontSize: "13px", color: "var(--text-muted)", margin: 0 }}>
               Lưu mã đặt sân SAN-XXXX để check-in tại quầy hoặc tra cứu/hủy trực tuyến bất kỳ lúc nào.
@@ -4336,7 +4300,7 @@ export default function Home() {
                 target="_blank"
                 rel="noreferrer"
                 className="primary-button"
-                style={{ background: "#329dd2", color: "#ffffff", border: "none", fontWeight: 700 }}
+                style={{ background: "#10b981", color: "#ffffff", border: "none", fontWeight: 700 }}
               >
                 Mở radar sân trên Google Maps ↗
               </a>
@@ -4584,130 +4548,6 @@ export default function Home() {
         </div>
       )}
 
-      {/* Modal Cấu hình & Kiểm tra API Wispbyte / Neon */}
-      {apiConfigOpen && (
-        <div className="modal-overlay" onClick={() => setApiConfigOpen(false)}>
-          <div
-            className="modal-card"
-            style={{ maxWidth: "560px" }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="modal-header">
-              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                <span style={{ fontSize: "20px" }}>🔌</span>
-                <h3 style={{ margin: 0, fontSize: "18px" }}>Cấu hình Kết nối API (Wispbyte &amp; Neon)</h3>
-              </div>
-              <button
-                type="button"
-                className="modal-close-btn"
-                onClick={() => setApiConfigOpen(false)}
-              >
-                ✕
-              </button>
-            </div>
-
-            <div style={{ padding: "20px 24px" }}>
-              <p style={{ fontSize: "13px", color: "#64748b", margin: "0 0 16px", lineHeight: "1.6" }}>
-                Hệ thống hỗ trợ cơ chế Decoupled: Frontend có thể kết nối linh hoạt tới <strong>Container Wispbyte</strong>, <strong>Localhost</strong> hoặc <strong>Proxy HTTPS</strong> trên hosting của trường.
-              </p>
-
-              <div style={{ marginBottom: "16px" }}>
-                <label style={{ display: "block", fontSize: "12px", fontWeight: "700", color: "#334155", marginBottom: "6px" }}>
-                  CHỌN NHANH ĐỊA CHỈ SERVER:
-                </label>
-                <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                  <button
-                    type="button"
-                    className="outline-button"
-                    style={{ textAlign: "left", fontSize: "12px", padding: "8px 12px", display: "flex", justifyContent: "space-between", alignItems: "center" }}
-                    onClick={() => {
-                      setApiUrlInput("http://78.154.183.38:11199/api/v1");
-                      testAndSaveApi("http://78.154.183.38:11199/api/v1");
-                    }}
-                  >
-                    <span>🌐 <strong>Wispbyte VPS Server:</strong> http://78.154.183.38:11199/api/v1</span>
-                    <span style={{ color: "var(--primary)", fontWeight: "700" }}>Chọn &amp; Kết nối ➜</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    className="outline-button"
-                    style={{ textAlign: "left", fontSize: "12px", padding: "8px 12px", display: "flex", justifyContent: "space-between", alignItems: "center" }}
-                    onClick={() => {
-                      setApiUrlInput("http://localhost:3000/api/v1");
-                      testAndSaveApi("http://localhost:3000/api/v1");
-                    }}
-                  >
-                    <span>💻 <strong>Localhost Server (Máy cá nhân):</strong> http://localhost:3000/api/v1</span>
-                    <span style={{ color: "var(--primary)", fontWeight: "700" }}>Chọn &amp; Kết nối ➜</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    className="outline-button"
-                    style={{ textAlign: "left", fontSize: "12px", padding: "8px 12px", display: "flex", justifyContent: "space-between", alignItems: "center" }}
-                    onClick={() => {
-                      setApiUrlInput("./api_proxy.php?path=api/v1");
-                      testAndSaveApi("./api_proxy.php?path=api/v1");
-                    }}
-                  >
-                    <span>🛡️ <strong>Proxy PHP Trường (Tránh Mixed Content):</strong> ./api_proxy.php</span>
-                    <span style={{ color: "var(--primary)", fontWeight: "700" }}>Chọn &amp; Kết nối ➜</span>
-                  </button>
-                </div>
-              </div>
-
-              <div style={{ marginBottom: "16px" }}>
-                <label style={{ display: "block", fontSize: "12px", fontWeight: "700", color: "#334155", marginBottom: "6px" }}>
-                  HOẶC NHẬP URL TÙY CHỌN:
-                </label>
-                <input
-                  type="text"
-                  value={apiUrlInput}
-                  onChange={(e) => setApiUrlInput(e.target.value)}
-                  style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid var(--border)", fontFamily: "monospace", fontSize: "13px" }}
-                  placeholder="http://78.154.183.38:11199/api/v1"
-                />
-              </div>
-
-              {apiCheckMsg && (
-                <div style={{
-                  padding: "10px 14px",
-                  borderRadius: "8px",
-                  fontSize: "13px",
-                  marginBottom: "16px",
-                  background: isApiConnected ? "#f0fdf4" : "#fef2f2",
-                  color: isApiConnected ? "#166534" : "#991b1b",
-                  border: isApiConnected ? "1px solid #bbf7d0" : "1px solid #fecaca",
-                }}>
-                  {apiCheckMsg}
-                </div>
-              )}
-
-              <div style={{ display: "flex", gap: "10px" }}>
-                <button
-                  type="button"
-                  disabled={apiChecking}
-                  className="primary-button"
-                  style={{ flex: 1, padding: "10px" }}
-                  onClick={() => testAndSaveApi()}
-                >
-                  {apiChecking ? "Đang kiểm tra..." : "⚡ Kiểm tra & Lưu kết nối"}
-                </button>
-                <button
-                  type="button"
-                  className="outline-button"
-                  style={{ padding: "10px 16px" }}
-                  onClick={() => setApiConfigOpen(false)}
-                >
-                  Đóng
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Floating Action Hotline/Zalo Support FAB */}
       <div className="floating-contact-fab">
         <a
@@ -4752,7 +4592,7 @@ export default function Home() {
               <Link href="/cv" style={{ color: "#22c55e", fontWeight: "700" }}>
                 👨‍💻 Hồ sơ Năng Lực (CV) Lê Duy Tài ↗
               </Link>
-              <a href="/admin" style={{ color: "#38bdf8", fontWeight: "600" }}>⚙️ Cổng Quản Trị Viên / Staff</a>
+              <a href="/admin" style={{ color: "#34d399", fontWeight: "600" }}>⚙️ Cổng Quản Trị Viên / Staff</a>
               <a href={`${API.replace(/\/api\/v1$/, "")}/`} target="_blank" style={{ color: "#cbd5e1" }}>📖 Swagger REST API Docs ↗</a>
               <a href={`${API.replace(/\/api\/v1$/, "")}/openapi.json`} target="_blank" style={{ color: "#cbd5e1" }}>📄 OpenAPI JSON Specification ↗</a>
             </div>
@@ -4769,7 +4609,7 @@ export default function Home() {
               Lê Duy Tài
             </a>
             <span>và</span>
-            <a href="https://cv-landing-page-peach.vercel.app/" target="_blank" rel="noopener noreferrer" style={{ color: "#38bdf8", fontWeight: "800", textDecoration: "underline" }} title="Nhấn để xem CV trực tiếp của Kpa Trần Quang Thịnh">
+            <a href="https://cv-landing-page-peach.vercel.app/" target="_blank" rel="noopener noreferrer" style={{ color: "#34d399", fontWeight: "800", textDecoration: "underline" }} title="Nhấn để xem CV trực tiếp của Kpa Trần Quang Thịnh">
               Kpa Trần Quang Thịnh
             </a>
             <Link href="/cv" style={{ background: "#22c55e", color: "#052e16", fontWeight: "800", fontSize: "11px", padding: "3px 10px", borderRadius: "999px", textDecoration: "none", marginLeft: "4px" }} title="Xem trang thông tin 2 lập trình viên">
@@ -4786,7 +4626,7 @@ export default function Home() {
           <div className="modal-content" style={{ maxWidth: "860px", width: "95%" }} onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <div>
-                <span className="section-tag" style={{ background: "rgba(50, 157, 210, 0.15)", color: "#329dd2", border: "1px solid rgba(50, 157, 210, 0.35)" }}>TRUNG TÂM CẦU THỦ BMT</span>
+                <span className="section-tag" style={{ background: "rgba(16, 185, 129, 0.15)", color: "#10b981", border: "1px solid rgba(16, 185, 129, 0.35)" }}>TRUNG TÂM CẦU THỦ BMT</span>
                 <h3 style={{ margin: 0, color: "#ffffff" }}>Bảng Điều Khiển Tài Khoản &amp; Vé Của Tôi</h3>
               </div>
               <button type="button" className="modal-close-btn" onClick={() => setProfileModalOpen(false)}>✕</button>
@@ -4794,10 +4634,10 @@ export default function Home() {
 
             <div className="modal-body" style={{ maxHeight: "78vh", overflowY: "auto", padding: "20px 24px" }}>
               {/* Profile card summary */}
-              <div style={{ background: "linear-gradient(135deg, #0e1626 0%, #152238 100%)", color: "#ffffff", padding: "20px 24px", borderRadius: "16px", marginBottom: "20px", border: "1px solid rgba(50, 157, 210, 0.35)", boxShadow: "0 8px 24px rgba(0,0,0,0.4)" }}>
+              <div style={{ background: "linear-gradient(135deg, #0f172a 0%, #152238 100%)", color: "#ffffff", padding: "20px 24px", borderRadius: "16px", marginBottom: "20px", border: "1px solid rgba(16, 185, 129, 0.35)", boxShadow: "0 8px 24px rgba(0,0,0,0.4)" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "14px" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-                    <div style={{ width: "54px", height: "54px", borderRadius: "50%", background: "rgba(50, 157, 210, 0.2)", border: "2px solid #329dd2", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "28px" }}>
+                    <div style={{ width: "54px", height: "54px", borderRadius: "50%", background: "rgba(16, 185, 129, 0.2)", border: "2px solid #10b981", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "28px" }}>
                       {userAvatar}
                     </div>
                     <div>
@@ -4810,15 +4650,15 @@ export default function Home() {
                       👑 HỘI VIÊN BMT VIP
                     </span>
                     {myClub && (
-                      <span style={{ background: "rgba(50, 157, 210, 0.15)", color: "#38bdf8", border: "1px solid rgba(50, 157, 210, 0.35)", padding: "4px 12px", borderRadius: "999px", fontSize: "11px", fontWeight: 800 }}>
+                      <span style={{ background: "rgba(16, 185, 129, 0.15)", color: "#34d399", border: "1px solid rgba(16, 185, 129, 0.35)", padding: "4px 12px", borderRadius: "999px", fontSize: "11px", fontWeight: 800 }}>
                         🛡️ {myClub.name} ({myClub.elo} ELO · {myClub.tier})
                       </span>
                     )}
                   </div>
                 </div>
                 <div style={{ marginTop: "14px", borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: "10px", fontSize: "12px", color: "#cbd5e1", display: "flex", flexWrap: "wrap", gap: "16px" }}>
-                  <span>⚽ Vị trí: <strong style={{ color: "#38bdf8" }}>{userPosition}</strong></span>
-                  <span>👟 Chân thuận: <strong style={{ color: "#38bdf8" }}>{userPreferredFoot}</strong></span>
+                  <span>⚽ Vị trí: <strong style={{ color: "#34d399" }}>{userPosition}</strong></span>
+                  <span>👟 Chân thuận: <strong style={{ color: "#34d399" }}>{userPreferredFoot}</strong></span>
                   <span>👕 Số áo: <strong style={{ color: "#f59e0b" }}>#{userFavoriteNumber}</strong></span>
                   <span>📍 Khu vực: <strong style={{ color: "#cbd5e1" }}>{userArea}</strong></span>
                 </div>
@@ -4829,7 +4669,7 @@ export default function Home() {
                 <button
                   type="button"
                   className={`quick-day-btn ${profileTab === "BOOKINGS" ? "active" : ""}`}
-                  style={{ fontSize: "12px", padding: "8px 14px", whiteSpace: "nowrap", background: profileTab === "BOOKINGS" ? "#329dd2" : "rgba(255,255,255,0.05)", color: "#ffffff", border: "1px solid rgba(50, 157, 210, 0.3)" }}
+                  style={{ fontSize: "12px", padding: "8px 14px", whiteSpace: "nowrap", background: profileTab === "BOOKINGS" ? "#10b981" : "rgba(255,255,255,0.05)", color: "#ffffff", border: "1px solid rgba(16, 185, 129, 0.3)" }}
                   onClick={() => { setProfileTab("BOOKINGS"); setProfileNotice(""); fetchMyBookings(); }}
                 >
                   🎫 Vé &amp; Lịch sân ({myBookings.length})
@@ -4837,7 +4677,7 @@ export default function Home() {
                 <button
                   type="button"
                   className={`quick-day-btn ${profileTab === "FC_TEAM" ? "active" : ""}`}
-                  style={{ fontSize: "12px", padding: "8px 14px", whiteSpace: "nowrap", background: profileTab === "FC_TEAM" ? "#329dd2" : "rgba(255,255,255,0.05)", color: "#ffffff", border: "1px solid rgba(50, 157, 210, 0.3)" }}
+                  style={{ fontSize: "12px", padding: "8px 14px", whiteSpace: "nowrap", background: profileTab === "FC_TEAM" ? "#10b981" : "rgba(255,255,255,0.05)", color: "#ffffff", border: "1px solid rgba(16, 185, 129, 0.3)" }}
                   onClick={() => { setProfileTab("FC_TEAM"); setProfileNotice(""); }}
                 >
                   🛡️ FC Của Tôi {myClub ? `(${myClub.members?.length || 1}/15)` : ""}
@@ -4845,7 +4685,7 @@ export default function Home() {
                 <button
                   type="button"
                   className={`quick-day-btn ${profileTab === "MATCHES" ? "active" : ""}`}
-                  style={{ fontSize: "12px", padding: "8px 14px", whiteSpace: "nowrap", background: profileTab === "MATCHES" ? "#329dd2" : "rgba(255,255,255,0.05)", color: "#ffffff", border: "1px solid rgba(50, 157, 210, 0.3)" }}
+                  style={{ fontSize: "12px", padding: "8px 14px", whiteSpace: "nowrap", background: profileTab === "MATCHES" ? "#10b981" : "rgba(255,255,255,0.05)", color: "#ffffff", border: "1px solid rgba(16, 185, 129, 0.3)" }}
                   onClick={() => { setProfileTab("MATCHES"); setProfileNotice(""); }}
                 >
                   🤝 Kèo thi đấu của tôi
@@ -4853,7 +4693,7 @@ export default function Home() {
                 <button
                   type="button"
                   className={`quick-day-btn ${profileTab === "FAVORITES" ? "active" : ""}`}
-                  style={{ fontSize: "12px", padding: "8px 14px", whiteSpace: "nowrap", background: profileTab === "FAVORITES" ? "#329dd2" : "rgba(255,255,255,0.05)", color: "#ffffff", border: "1px solid rgba(50, 157, 210, 0.3)" }}
+                  style={{ fontSize: "12px", padding: "8px 14px", whiteSpace: "nowrap", background: profileTab === "FAVORITES" ? "#10b981" : "rgba(255,255,255,0.05)", color: "#ffffff", border: "1px solid rgba(16, 185, 129, 0.3)" }}
                   onClick={() => { setProfileTab("FAVORITES"); setProfileNotice(""); }}
                 >
                   ⭐ Sân yêu thích ({favoritePitchIds.length})
@@ -4861,7 +4701,7 @@ export default function Home() {
                 <button
                   type="button"
                   className={`quick-day-btn ${profileTab === "PROFILE" ? "active" : ""}`}
-                  style={{ fontSize: "12px", padding: "8px 14px", whiteSpace: "nowrap", background: profileTab === "PROFILE" ? "#329dd2" : "rgba(255,255,255,0.05)", color: "#ffffff", border: "1px solid rgba(50, 157, 210, 0.3)" }}
+                  style={{ fontSize: "12px", padding: "8px 14px", whiteSpace: "nowrap", background: profileTab === "PROFILE" ? "#10b981" : "rgba(255,255,255,0.05)", color: "#ffffff", border: "1px solid rgba(16, 185, 129, 0.3)" }}
                   onClick={() => { setProfileTab("PROFILE"); setProfileNotice(""); }}
                 >
                   👤 Hồ sơ cá nhân
@@ -4869,7 +4709,7 @@ export default function Home() {
                 <button
                   type="button"
                   className={`quick-day-btn ${profileTab === "PASSWORD" ? "active" : ""}`}
-                  style={{ fontSize: "12px", padding: "8px 14px", whiteSpace: "nowrap", background: profileTab === "PASSWORD" ? "#329dd2" : "rgba(255,255,255,0.05)", color: "#ffffff", border: "1px solid rgba(50, 157, 210, 0.3)" }}
+                  style={{ fontSize: "12px", padding: "8px 14px", whiteSpace: "nowrap", background: profileTab === "PASSWORD" ? "#10b981" : "rgba(255,255,255,0.05)", color: "#ffffff", border: "1px solid rgba(16, 185, 129, 0.3)" }}
                   onClick={() => { setProfileTab("PASSWORD"); setProfileNotice(""); }}
                 >
                   🔐 Mật khẩu
@@ -4877,7 +4717,7 @@ export default function Home() {
               </div>
 
               {profileNotice && (
-                <div style={{ background: profileNotice.startsWith("❌") ? "rgba(235, 47, 51, 0.15)" : "rgba(50, 157, 210, 0.15)", border: `1px solid ${profileNotice.startsWith("❌") ? "rgba(235, 47, 51, 0.35)" : "rgba(50, 157, 210, 0.35)"}`, color: profileNotice.startsWith("❌") ? "#fca5a5" : "#38bdf8", padding: "10px 14px", borderRadius: "8px", fontSize: "13px", marginBottom: "16px", fontWeight: 600 }}>
+                <div style={{ background: profileNotice.startsWith("❌") ? "rgba(235, 47, 51, 0.15)" : "rgba(16, 185, 129, 0.15)", border: `1px solid ${profileNotice.startsWith("❌") ? "rgba(235, 47, 51, 0.35)" : "rgba(16, 185, 129, 0.35)"}`, color: profileNotice.startsWith("❌") ? "#fca5a5" : "#34d399", padding: "10px 14px", borderRadius: "8px", fontSize: "13px", marginBottom: "16px", fontWeight: 600 }}>
                   {profileNotice}
                 </div>
               )}
@@ -4937,14 +4777,14 @@ export default function Home() {
                           >
                             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "10px", marginBottom: "8px" }}>
                               <div>
-                                <span style={{ fontFamily: "monospace", fontSize: "12px", color: "#38bdf8", fontWeight: 800, background: "rgba(50, 157, 210, 0.12)", padding: "2px 8px", borderRadius: "6px" }}>
+                                <span style={{ fontFamily: "monospace", fontSize: "12px", color: "#34d399", fontWeight: 800, background: "rgba(16, 185, 129, 0.12)", padding: "2px 8px", borderRadius: "6px" }}>
                                   {b.bookingCode}
                                 </span>
                                 <h4 style={{ margin: "6px 0 2px", fontSize: "16px", color: "#ffffff" }}>
                                   {b.parentVenueName || b.fieldName || "Cụm sân Buôn Ma Thuột"}
                                 </h4>
                                 <div style={{ fontSize: "12px", color: "#94a3b8" }}>
-                                  ⚽ Sân con: <strong style={{ color: "#38bdf8" }}>{b.subPitchName || "Sân con mini"}</strong> ({b.categoryName || "Sân tiêu chuẩn"})
+                                  ⚽ Sân con: <strong style={{ color: "#34d399" }}>{b.subPitchName || "Sân con mini"}</strong> ({b.categoryName || "Sân tiêu chuẩn"})
                                 </div>
                               </div>
 
@@ -4955,7 +4795,7 @@ export default function Home() {
                                   </span>
                                 )}
                                 {isConfirmed && (
-                                  <span style={{ background: "rgba(50, 157, 210, 0.15)", color: "#38bdf8", border: "1px solid rgba(50, 157, 210, 0.35)", padding: "4px 10px", borderRadius: "999px", fontSize: "11px", fontWeight: 800 }}>
+                                  <span style={{ background: "rgba(16, 185, 129, 0.15)", color: "#34d399", border: "1px solid rgba(16, 185, 129, 0.35)", padding: "4px 10px", borderRadius: "999px", fontSize: "11px", fontWeight: 800 }}>
                                     ✓ ĐÃ CỌC - SẴN SÀNG ĐÁ
                                   </span>
                                 )}
@@ -4976,7 +4816,7 @@ export default function Home() {
                               <div>📅 Ngày đá: <strong>{b.date || (b.startAt ? b.startAt.slice(0, 10) : "Hôm nay")}</strong></div>
                               <div>⏰ Giờ đá: <strong>{b.timeLabel || "Ca chiều / tối"}</strong></div>
                               <div>💰 Tổng tiền: <strong style={{ color: "#f59e0b" }}>{money(Number(b.totalPrice || 350000))}</strong></div>
-                              <div>💳 Tiền cọc (30%): <strong style={{ color: "#38bdf8" }}>{money(Math.max(100000, Math.round(Number(b.totalPrice || 350000) * 0.3)))}</strong></div>
+                              <div>💳 Tiền cọc (30%): <strong style={{ color: "#34d399" }}>{money(Math.max(100000, Math.round(Number(b.totalPrice || 350000) * 0.3)))}</strong></div>
                             </div>
 
                             <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginTop: "12px", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "10px" }}>
@@ -5032,7 +4872,7 @@ export default function Home() {
                 <div>
                   {myClub ? (
                     <div>
-                      <div style={{ background: "linear-gradient(135deg, #131e32 0%, #0e1626 100%)", border: "1px solid rgba(50, 157, 210, 0.35)", borderRadius: "14px", padding: "18px 20px", marginBottom: "18px" }}>
+                      <div style={{ background: "linear-gradient(135deg, #131e32 0%, #0f172a 100%)", border: "1px solid rgba(16, 185, 129, 0.35)", borderRadius: "14px", padding: "18px 20px", marginBottom: "18px" }}>
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "10px" }}>
                           <div>
                             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
@@ -5040,7 +4880,7 @@ export default function Home() {
                               <div>
                                 <h3 style={{ margin: 0, fontSize: "20px", color: "#ffffff" }}>{myClub.name}</h3>
                                 <div style={{ fontSize: "12px", color: "#94a3b8" }}>
-                                  Đội trưởng: <strong style={{ color: "#38bdf8" }}>{myClub.captainName}</strong> ({myClub.captainPhone}) · Sân nhà: <strong>{myClub.homePitch || "SVĐ Buôn Ma Thuột"}</strong>
+                                  Đội trưởng: <strong style={{ color: "#34d399" }}>{myClub.captainName}</strong> ({myClub.captainPhone}) · Sân nhà: <strong>{myClub.homePitch || "SVĐ Buôn Ma Thuột"}</strong>
                                 </div>
                               </div>
                             </div>
@@ -5055,7 +4895,7 @@ export default function Home() {
 
                         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "10px", marginTop: "14px", borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: "12px", textAlign: "center", fontSize: "12px" }}>
                           <div><div style={{ color: "#94a3b8" }}>Trận đấu</div><strong style={{ fontSize: "16px", color: "#ffffff" }}>{myClub.wins + myClub.draws + myClub.losses}</strong></div>
-                          <div><div style={{ color: "#38bdf8" }}>Thắng</div><strong style={{ fontSize: "16px", color: "#38bdf8" }}>{myClub.wins}</strong></div>
+                          <div><div style={{ color: "#34d399" }}>Thắng</div><strong style={{ fontSize: "16px", color: "#34d399" }}>{myClub.wins}</strong></div>
                           <div><div style={{ color: "#fbbf24" }}>Hòa</div><strong style={{ fontSize: "16px", color: "#fbbf24" }}>{myClub.draws}</strong></div>
                           <div><div style={{ color: "#eb2f33" }}>Thua</div><strong style={{ fontSize: "16px", color: "#eb2f33" }}>{myClub.losses}</strong></div>
                         </div>
@@ -5084,7 +4924,7 @@ export default function Home() {
                               }}
                             >
                               <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                                <div style={{ width: "32px", height: "32px", borderRadius: "50%", background: "rgba(50, 157, 210, 0.15)", color: "#38bdf8", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: "12px" }}>
+                                <div style={{ width: "32px", height: "32px", borderRadius: "50%", background: "rgba(16, 185, 129, 0.15)", color: "#34d399", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: "12px" }}>
                                   #{mIdx + 1}
                                 </div>
                                 <div>
@@ -5113,8 +4953,8 @@ export default function Home() {
 
                       {/* Form thêm thành viên mới nếu chưa đủ 15 người */}
                       {myClub.members?.length < 15 ? (
-                        <form onSubmit={handleAddMemberToMyClub} style={{ background: "rgba(50, 157, 210, 0.06)", border: "1px dashed rgba(50, 157, 210, 0.35)", borderRadius: "12px", padding: "14px 18px" }}>
-                          <strong style={{ fontSize: "13px", color: "#38bdf8", display: "block", marginBottom: "10px" }}>
+                        <form onSubmit={handleAddMemberToMyClub} style={{ background: "rgba(16, 185, 129, 0.06)", border: "1px dashed rgba(16, 185, 129, 0.35)", borderRadius: "12px", padding: "14px 18px" }}>
+                          <strong style={{ fontSize: "13px", color: "#34d399", display: "block", marginBottom: "10px" }}>
                             ➕ Thêm cầu thủ mới vào danh sách đội (Còn trống {15 - (myClub.members?.length || 1)} chỗ):
                           </strong>
                           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 90px auto", gap: "8px", alignItems: "flex-end" }}>
@@ -5264,7 +5104,7 @@ export default function Home() {
                                     <h4 style={{ margin: 0, fontSize: "16px", color: "#ffffff" }}>
                                       {p.teamName} {isMatched ? `vs ${p.matchedBy || "Đối thủ"}` : ""}
                                     </h4>
-                                    <span style={{ background: isOpen ? "rgba(50, 157, 210, 0.15)" : "rgba(245, 158, 11, 0.15)", color: isOpen ? "#38bdf8" : "#fbbf24", padding: "2px 8px", borderRadius: "6px", fontSize: "10px", fontWeight: 800 }}>
+                                    <span style={{ background: isOpen ? "rgba(16, 185, 129, 0.15)" : "rgba(245, 158, 11, 0.15)", color: isOpen ? "#34d399" : "#fbbf24", padding: "2px 8px", borderRadius: "6px", fontSize: "10px", fontWeight: 800 }}>
                                       {isOpen ? "ĐANG TÌM ĐỐI" : "ĐÃ BẮT ĐỐI"}
                                     </span>
                                   </div>
@@ -5397,8 +5237,8 @@ export default function Home() {
                             height: "42px",
                             fontSize: "22px",
                             borderRadius: "10px",
-                            border: userAvatar === emoji ? "2px solid #329dd2" : "1px solid var(--border)",
-                            background: userAvatar === emoji ? "rgba(50, 157, 210, 0.2)" : "rgba(255,255,255,0.04)",
+                            border: userAvatar === emoji ? "2px solid #10b981" : "1px solid var(--border)",
+                            background: userAvatar === emoji ? "rgba(16, 185, 129, 0.2)" : "rgba(255,255,255,0.04)",
                             cursor: "pointer",
                             transition: "all 0.2s",
                           }}
@@ -5525,7 +5365,7 @@ export default function Home() {
                     <input name="confirmPass" type="password" required placeholder="Nhập lại mật khẩu mới" style={{ height: "40px" }} />
                   </div>
 
-                  <div style={{ background: "rgba(50, 157, 210, 0.08)", border: "1px solid rgba(50, 157, 210, 0.25)", padding: "12px", borderRadius: "8px", fontSize: "12px", color: "#cbd5e1" }}>
+                  <div style={{ background: "rgba(16, 185, 129, 0.08)", border: "1px solid rgba(16, 185, 129, 0.25)", padding: "12px", borderRadius: "8px", fontSize: "12px", color: "#cbd5e1" }}>
                     🔒 Mật khẩu được mã hóa chuẩn bcrypt an toàn trên máy chủ Neon PostgreSQL.
                   </div>
 
@@ -5549,7 +5389,7 @@ export default function Home() {
         <div className="modal-overlay" onClick={() => setActiveTicketQr(null)}>
           <div className="modal-content" style={{ maxWidth: "420px", textAlign: "center", padding: "28px" }} onClick={(e) => e.stopPropagation()}>
             <h3 style={{ margin: "0 0 6px", color: "#ffffff", fontSize: "18px" }}>MÃ VIETQR THANH TOÁN TIỀN CỌC</h3>
-            <p style={{ fontSize: "12px", color: "#94a3b8", margin: "0 0 16px" }}>Mã vé: <strong style={{ color: "#38bdf8" }}>{activeTicketQr.bookingCode}</strong></p>
+            <p style={{ fontSize: "12px", color: "#94a3b8", margin: "0 0 16px" }}>Mã vé: <strong style={{ color: "#34d399" }}>{activeTicketQr.bookingCode}</strong></p>
             <div style={{ background: "#ffffff", padding: "12px", borderRadius: "12px", display: "inline-block", marginBottom: "14px" }}>
               <img src={activeTicketQr.qrUrl} alt="VietQR" style={{ width: "220px", height: "220px", display: "block" }} />
             </div>
@@ -5577,7 +5417,7 @@ export default function Home() {
               </p>
               <div style={{ display: "grid", gridTemplateColumns: "1fr auto 1fr", gap: "12px", alignItems: "center", textAlign: "center", marginBottom: "20px" }}>
                 <div>
-                  <div style={{ fontSize: "14px", fontWeight: 800, color: "#38bdf8", marginBottom: "6px" }}>{matchScoreModal.teamName}</div>
+                  <div style={{ fontSize: "14px", fontWeight: 800, color: "#34d399", marginBottom: "6px" }}>{matchScoreModal.teamName}</div>
                   <input
                     type="number"
                     min={0}
@@ -5600,7 +5440,7 @@ export default function Home() {
                   />
                 </div>
               </div>
-              <div style={{ background: "rgba(50, 157, 210, 0.1)", border: "1px solid rgba(50, 157, 210, 0.3)", borderRadius: "8px", padding: "10px", fontSize: "12px", color: "#cbd5e1", marginBottom: "16px" }}>
+              <div style={{ background: "rgba(16, 185, 129, 0.1)", border: "1px solid rgba(16, 185, 129, 0.3)", borderRadius: "8px", padding: "10px", fontSize: "12px", color: "#cbd5e1", marginBottom: "16px" }}>
                 Quy tắc ELO: Thắng (+25 ELO) · Hòa (+5 ELO) · Thua (-15 ELO).
               </div>
               <div style={{ display: "flex", gap: "10px" }}>
@@ -5716,7 +5556,7 @@ export default function Home() {
           <div className="modal-card" style={{ maxWidth: "480px" }}>
             <div className="modal-header">
               <div>
-                <h3 style={{ margin: 0, fontSize: "18px", color: "#080f1b" }}>⚔️ Thách Đấu &amp; Ghi Nhận Leo Rank ELO</h3>
+                <h3 style={{ margin: 0, fontSize: "18px", color: "#090e17" }}>⚔️ Thách Đấu &amp; Ghi Nhận Leo Rank ELO</h3>
                 <p style={{ fontSize: "12px", color: "#64748b", margin: "2px 0 0 0" }}>Cộng trừ điểm ELO cập nhật Bảng Xếp Hạng Ban Mê</p>
               </div>
               <button type="button" className="modal-close" onClick={() => setChallengeModalOpen(false)}>✕</button>
@@ -5752,9 +5592,9 @@ export default function Home() {
                 </div>
               </div>
 
-              <div style={{ background: "#080f1b", border: "1px solid #1e3355", borderRadius: "10px", padding: "12px", fontSize: "12px", color: "#cbd5e1" }}>
-                <strong style={{ color: "#329dd2" }}>📊 Quy tắc tính điểm ELO Leo Rank:</strong>
-                <div style={{ marginTop: "4px" }}>• Thắng: <strong style={{ color: "#329dd2" }}>+25 ELO</strong> · Thua: <strong style={{ color: "#eb2f33" }}>-15 ELO</strong> · Hòa: <strong>+5 ELO</strong></div>
+              <div style={{ background: "#090e17", border: "1px solid #1e3355", borderRadius: "10px", padding: "12px", fontSize: "12px", color: "#cbd5e1" }}>
+                <strong style={{ color: "#10b981" }}>📊 Quy tắc tính điểm ELO Leo Rank:</strong>
+                <div style={{ marginTop: "4px" }}>• Thắng: <strong style={{ color: "#10b981" }}>+25 ELO</strong> · Thua: <strong style={{ color: "#eb2f33" }}>-15 ELO</strong> · Hòa: <strong>+5 ELO</strong></div>
               </div>
 
               <div style={{ display: "flex", gap: "10px", marginTop: "6px" }}>
@@ -5860,7 +5700,7 @@ export default function Home() {
 
             <form onSubmit={handleAcceptMatchSubmit} style={{ padding: "20px", display: "flex", flexDirection: "column", gap: "14px" }}>
               <div style={{ background: "var(--surface-alt)", border: "1px solid var(--border)", borderRadius: "10px", padding: "14px", fontSize: "13px" }}>
-                <div style={{ color: "#38bdf8", fontWeight: 700, marginBottom: "4px" }}>
+                <div style={{ color: "#34d399", fontWeight: 700, marginBottom: "4px" }}>
                   Đội thách đấu: <span style={{ fontSize: "15px", color: "#ffffff" }}>{activeMatchToAccept.teamName}</span>
                 </div>
                 <div style={{ color: "var(--text-muted)", fontSize: "12px" }}>

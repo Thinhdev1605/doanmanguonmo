@@ -286,8 +286,8 @@ export default function LookupPage() {
 
         {/* Quick select from recent tickets */}
         {recentBookings.length > 0 && (
-          <div style={{ background: "#f8fafc", border: "1px solid var(--border)", borderRadius: "12px", padding: "16px 20px", marginBottom: "24px" }}>
-            <div style={{ fontSize: "12px", fontWeight: "700", color: "#475569", marginBottom: "10px" }}>
+          <div style={{ background: "rgba(16, 185, 129, 0.08)", border: "1px solid rgba(16, 185, 129, 0.3)", borderRadius: "14px", padding: "16px 20px", marginBottom: "24px" }}>
+            <div style={{ fontSize: "12px", fontWeight: "800", color: "#34d399", marginBottom: "10px", letterSpacing: "0.5px" }}>
               ⚡ CÁC PHIẾU ĐẶT GẦN ĐÂY CỦA BẠN:
             </div>
             <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
@@ -296,14 +296,14 @@ export default function LookupPage() {
                   key={item.bookingCode}
                   type="button"
                   className="quick-day-btn"
-                  style={{ display: "flex", alignItems: "center", gap: "8px" }}
+                  style={{ display: "flex", alignItems: "center", gap: "8px", background: "var(--surface-alt)", border: "1px solid rgba(16, 185, 129, 0.3)", color: "#f8fafc", padding: "6px 14px", borderRadius: "8px", cursor: "pointer" }}
                   onClick={() => {
                     setBookingCode(item.bookingCode);
                     setCustomerPhone(item.customerPhone || "");
                     void lookup(undefined, item.bookingCode, item.customerPhone || "");
                   }}
                 >
-                  <strong style={{ color: "#16a34a" }}>{item.bookingCode}</strong>
+                  <strong style={{ color: "#34d399" }}>{item.bookingCode}</strong>
                   <span>({item.fieldName || item.parentVenueName} - {item.date})</span>
                 </button>
               ))}
@@ -312,24 +312,26 @@ export default function LookupPage() {
         )}
 
         {/* Lookup form */}
-        <div style={{ background: "#ffffff", border: "1px solid var(--border)", borderRadius: "16px", padding: "28px", boxShadow: "var(--shadow-sm)" }}>
+        <div style={{ background: "var(--surface)", border: "1px solid rgba(16, 185, 129, 0.25)", borderRadius: "18px", padding: "28px", boxShadow: "var(--shadow-md)" }}>
           <form onSubmit={(e) => lookup(e)} style={{ display: "grid", gridTemplateColumns: "1fr 1fr auto", gap: "16px", alignItems: "flex-end" }}>
             <div className="form-group" style={{ margin: 0 }}>
-              <label>Mã phiếu đặt sân (booking code)</label>
+              <label style={{ color: "#cbd5e1", fontSize: "12px", fontWeight: 700 }}>Mã phiếu đặt sân (booking code)</label>
               <input
                 value={bookingCode}
                 onChange={(e) => setBookingCode(e.target.value)}
                 placeholder="Ví dụ: SAN-..."
+                style={{ background: "var(--surface-alt)", border: "1px solid var(--border)", color: "#ffffff", height: "44px", borderRadius: "8px", padding: "0 12px" }}
               />
             </div>
 
             <div className="form-group" style={{ margin: 0 }}>
-              <label>Số điện thoại liên hệ</label>
+              <label style={{ color: "#cbd5e1", fontSize: "12px", fontWeight: 700 }}>Số điện thoại liên hệ</label>
               <input
                 type="tel"
                 value={customerPhone}
                 onChange={(e) => setCustomerPhone(e.target.value)}
                 placeholder="Ví dụ: 0896890399"
+                style={{ background: "var(--surface-alt)", border: "1px solid var(--border)", color: "#ffffff", height: "44px", borderRadius: "8px", padding: "0 12px" }}
               />
             </div>
 
@@ -419,21 +421,21 @@ export default function LookupPage() {
 
             {/* 30-Minute VietQR Box for PENDING */}
             {booking.status === "PENDING" && (
-              <div style={{ margin: "0 28px 24px", background: "#f8fafc", border: "2px dashed #16a34a", borderRadius: "14px", padding: "20px" }}>
+              <div style={{ margin: "0 28px 24px", background: "rgba(16, 185, 129, 0.06)", border: "2px dashed #10b981", borderRadius: "14px", padding: "20px" }}>
                 {countdown > 0 ? (
                   <>
                     <div style={{
-                      background: "rgba(234, 88, 12, 0.12)",
-                      border: "1px solid #fdba74",
+                      background: "rgba(245, 158, 11, 0.15)",
+                      border: "1px solid rgba(245, 158, 11, 0.4)",
                       padding: "10px 14px",
                       borderRadius: "8px",
                       textAlign: "center",
                       marginBottom: "16px"
                     }}>
-                      <div style={{ fontSize: "16px", fontWeight: "900", color: "#c2410c" }}>
+                      <div style={{ fontSize: "16px", fontWeight: "900", color: "#fbbf24" }}>
                         ⏳ MÃ QR CÒN HIỆU LỰC: {Math.floor(countdown / 60).toString().padStart(2, "0")}:{(countdown % 60).toString().padStart(2, "0")}
                       </div>
-                      <div style={{ fontSize: "12px", color: "#7c2d12", marginTop: "4px" }}>
+                      <div style={{ fontSize: "12px", color: "#fef3c7", marginTop: "4px" }}>
                         Vui lòng hoàn tất chuyển khoản cọc <strong>{money(depositAmount)}</strong> trước khi đồng hồ đếm về 0:00.
                       </div>
                     </div>
@@ -442,17 +444,17 @@ export default function LookupPage() {
                       <img
                         src={qrUrl}
                         alt="Mã VietQR thanh toán cọc"
-                        style={{ width: "220px", height: "220px", display: "block", margin: "0 auto", borderRadius: "10px", border: "1px solid #cbd5e1" }}
+                        style={{ width: "220px", height: "220px", display: "block", margin: "0 auto", borderRadius: "10px", border: "1px solid rgba(16, 185, 129, 0.3)" }}
                       />
                     </div>
 
-                    <div style={{ background: "#ffffff", padding: "14px 18px", borderRadius: "10px", border: "1px solid #e2e8f0", fontSize: "13px", lineHeight: "1.7", color: "#334155" }}>
+                    <div style={{ background: "var(--surface-alt)", padding: "14px 18px", borderRadius: "10px", border: "1px solid var(--border)", fontSize: "13px", lineHeight: "1.7", color: "#f8fafc" }}>
                       <div>Ngân hàng: <strong>MB Bank (Napas 247)</strong></div>
-                      <div>Số tài khoản: <strong style={{ color: "#16a34a", fontSize: "14px" }}>02304200699999</strong></div>
+                      <div>Số tài khoản: <strong style={{ color: "#34d399", fontSize: "14px" }}>02304200699999</strong></div>
                       <div>Chủ tài khoản: <strong>LE DUY TAI</strong></div>
-                      <div>Số tiền cọc: <strong style={{ color: "#b45309" }}>{money(depositAmount)}</strong></div>
-                      <div>Nội dung CK: <strong style={{ color: "#16a34a", fontSize: "15px" }}>{booking.bookingCode}</strong></div>
-                      <div style={{ borderTop: "1px dashed #cbd5e1", marginTop: "6px", paddingTop: "6px", fontSize: "12px", color: "#64748b" }}>
+                      <div>Số tiền cọc: <strong style={{ color: "#fbbf24" }}>{money(depositAmount)}</strong></div>
+                      <div>Nội dung CK: <strong style={{ color: "#34d399", fontSize: "15px" }}>{booking.bookingCode}</strong></div>
+                      <div style={{ borderTop: "1px dashed var(--border)", marginTop: "6px", paddingTop: "6px", fontSize: "12px", color: "#94a3b8" }}>
                         📞 Hotline hỗ trợ: <strong>0896890399</strong> · 📍 Ea Kao, Buôn Ma Thuột
                       </div>
                     </div>
@@ -488,7 +490,7 @@ export default function LookupPage() {
             )}
 
             {/* Action Bar */}
-            <div style={{ padding: "18px 28px", background: "#f8fafc", borderTop: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "10px" }}>
+            <div style={{ padding: "18px 28px", background: "var(--surface-alt)", borderTop: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "10px" }}>
               <span style={{ fontSize: "12px", color: "#64748b" }}>
                 * Hỗ trợ kỹ thuật &amp; giải đáp: <strong>0896890399</strong> (Lê Duy Tài)
               </span>

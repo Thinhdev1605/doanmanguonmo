@@ -636,24 +636,24 @@ export default function AdminPage() {
 
   if (!token) {
     return (
-      <main style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#0f172a", padding: "20px" }}>
-        <div style={{ background: "#ffffff", borderRadius: "18px", padding: "36px", width: "100%", maxWidth: "460px", boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)" }}>
-          <div style={{ textAlign: "center", marginBottom: "20px" }}>
-            <div style={{ fontSize: "40px", marginBottom: "8px" }}>⚽</div>
-            <h1 style={{ fontSize: "24px", fontWeight: "900", margin: 0, color: "#0f172a" }}>CỔNG QUẢN TRỊ &amp; NHÂN VIÊN</h1>
-            <p style={{ fontSize: "13px", color: "#64748b", margin: "4px 0 0" }}>Đăng nhập vai trò ADMIN (Quản lý) hoặc STAFF (Nhân viên trực sân)</p>
+      <main style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "radial-gradient(circle at 50% 0%, #102538 0%, #090e17 75%, #05080f 100%)", padding: "20px" }}>
+        <div style={{ background: "rgba(15, 23, 42, 0.9)", border: "1.5px solid rgba(16, 185, 129, 0.35)", backdropFilter: "blur(20px)", borderRadius: "20px", padding: "36px", width: "100%", maxWidth: "480px", boxShadow: "0 25px 60px -12px rgba(0, 0, 0, 0.85), 0 0 30px rgba(16, 185, 129, 0.2)" }}>
+          <div style={{ textAlign: "center", marginBottom: "24px" }}>
+            <div style={{ width: "52px", height: "52px", borderRadius: "14px", background: "linear-gradient(135deg, #10b981, #059669)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "26px", margin: "0 auto 12px", boxShadow: "0 4px 18px rgba(16, 185, 129, 0.45)" }}>⚽</div>
+            <h1 style={{ fontSize: "24px", fontWeight: "900", margin: 0, color: "#f8fafc", letterSpacing: "-0.02em" }}>CỔNG QUẢN TRỊ &amp; NHÂN VIÊN</h1>
+            <p style={{ fontSize: "13px", color: "#94a3b8", margin: "6px 0 0" }}>Đăng nhập vai trò ADMIN (Quản lý) hoặc STAFF (Nhân viên trực sân)</p>
           </div>
 
           {/* Quick 1-click test credentials */}
-          <div style={{ background: "#f8fafc", border: "1px dashed #cbd5e1", borderRadius: "10px", padding: "12px", marginBottom: "18px" }}>
-            <div style={{ fontSize: "11px", fontWeight: "700", color: "#475569", marginBottom: "8px" }}>
+          <div style={{ background: "rgba(16, 185, 129, 0.08)", border: "1px dashed rgba(16, 185, 129, 0.35)", borderRadius: "12px", padding: "14px", marginBottom: "20px" }}>
+            <div style={{ fontSize: "11px", fontWeight: "800", color: "#34d399", marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
               ⚡ CHỌN TÀI KHOẢN ĐỂ ĐĂNG NHẬP (BẮT BUỘC NHẬP MẬT KHẨU):
             </div>
-            <div style={{ display: "flex", gap: "8px" }}>
+            <div style={{ display: "flex", gap: "10px" }}>
               <button
                 type="button"
                 className="quick-day-btn"
-                style={{ flex: 1, fontSize: "12px", background: "#dcfce7", color: "#166534", borderColor: "#86efac", fontWeight: 700 }}
+                style={{ flex: 1, fontSize: "12px", background: "rgba(16, 185, 129, 0.15)", color: "#34d399", borderColor: "rgba(16, 185, 129, 0.4)", fontWeight: 700, padding: "8px 12px", borderRadius: "8px", cursor: "pointer" }}
                 onClick={() => {
                   setEmail("admin@example.com");
                   setPassword("");
@@ -666,7 +666,7 @@ export default function AdminPage() {
               <button
                 type="button"
                 className="quick-day-btn"
-                style={{ flex: 1, fontSize: "12px", background: "#e0f2fe", color: "#0369a1", borderColor: "#7dd3fc", fontWeight: 700 }}
+                style={{ flex: 1, fontSize: "12px", background: "rgba(56, 189, 248, 0.15)", color: "#38bdf8", borderColor: "rgba(56, 189, 248, 0.4)", fontWeight: 700, padding: "8px 12px", borderRadius: "8px", cursor: "pointer" }}
                 onClick={() => {
                   setEmail("staff@example.com");
                   setPassword("");
@@ -680,46 +680,48 @@ export default function AdminPage() {
           </div>
 
           {loginNotice && (
-            <div style={{ background: "#f0fdf4", border: "1px solid #86efac", color: "#166534", padding: "10px 14px", borderRadius: "8px", fontSize: "13px", marginBottom: "14px", fontWeight: 600 }}>
+            <div style={{ background: "rgba(16, 185, 129, 0.12)", border: "1px solid rgba(16, 185, 129, 0.35)", color: "#34d399", padding: "10px 14px", borderRadius: "8px", fontSize: "13px", marginBottom: "14px", fontWeight: 600 }}>
               {loginNotice}
             </div>
           )}
 
           {loginError && (
-            <div style={{ background: "#fee2e2", border: "1px solid #fca5a5", color: "#991b1b", padding: "10px 14px", borderRadius: "8px", fontSize: "13px", marginBottom: "16px", fontWeight: 700 }}>
+            <div style={{ background: "rgba(239, 68, 68, 0.12)", border: "1px solid rgba(239, 68, 68, 0.35)", color: "#f87171", padding: "10px 14px", borderRadius: "8px", fontSize: "13px", marginBottom: "16px", fontWeight: 700 }}>
               {loginError}
             </div>
           )}
 
           <form onSubmit={handleLogin} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
             <div className="form-group" style={{ margin: 0 }}>
-              <label>Email hoặc Số điện thoại (Admin / Nhân viên) *</label>
+              <label style={{ color: "#cbd5e1", fontSize: "12px", fontWeight: 700 }}>Email hoặc Số điện thoại (Admin / Nhân viên) *</label>
               <input
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="admin@example.com hoặc staff@example.com"
+                style={{ background: "#090e17", border: "1px solid rgba(16, 185, 129, 0.3)", color: "#ffffff", height: "44px", borderRadius: "8px", padding: "0 12px" }}
               />
             </div>
 
             <div className="form-group" style={{ margin: 0 }}>
-              <label>Mật khẩu quản trị *</label>
+              <label style={{ color: "#cbd5e1", fontSize: "12px", fontWeight: 700 }}>Mật khẩu quản trị *</label>
               <input
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Nhập mật khẩu (Bắt buộc)..."
+                style={{ background: "#090e17", border: "1px solid rgba(16, 185, 129, 0.3)", color: "#ffffff", height: "44px", borderRadius: "8px", padding: "0 12px" }}
               />
             </div>
 
-            <button type="submit" className="primary-button" style={{ height: "46px", marginTop: "8px" }}>
+            <button type="submit" className="primary-button" style={{ height: "46px", marginTop: "8px", width: "100%", fontSize: "15px" }}>
               Đăng nhập vào Portal <span>→</span>
             </button>
           </form>
 
-          <div style={{ textAlign: "center", marginTop: "20px" }}>
-            <a href="/" style={{ fontSize: "13px", color: "#16a34a", fontWeight: "600" }}>
+          <div style={{ textAlign: "center", marginTop: "24px" }}>
+            <a href="/" style={{ fontSize: "13px", color: "#10b981", fontWeight: "600", textDecoration: "none" }}>
               ← Quay lại trang chủ khách hàng
             </a>
           </div>

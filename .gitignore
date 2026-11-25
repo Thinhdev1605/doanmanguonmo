@@ -4,6 +4,8 @@ dist/
 .env.local
 .next/
 web/.next/
+web/out/
+.agents/
 coverage/
 *.log
 node.exe
