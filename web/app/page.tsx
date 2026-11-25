@@ -7,6 +7,8 @@ function getApiUrl(): string {
   if (typeof window !== "undefined") {
     const saved = window.localStorage.getItem("football_api_url");
     if (saved && saved.trim()) return saved.trim().replace(/\/+$/, "");
+    const winConf = (window as any).__APP_CONFIG__ || (window as any).APP_CONFIG;
+    if (winConf?.API_URL && winConf.API_URL.trim()) return winConf.API_URL.trim().replace(/\/+$/, "");
   }
   return (
     process.env.NEXT_PUBLIC_API_BASE_URL ??

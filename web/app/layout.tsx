@@ -10,6 +10,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="vi">
+      <head>
+        <script src="/config.js" />
+      </head>
       <body>{children}</body>
     </html>
   );
